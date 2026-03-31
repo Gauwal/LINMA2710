@@ -27,8 +27,8 @@ public:
 
     // --- Common API (shared with DistributedMatrix and MatrixCL) ---
 
-    int numRows() const;
-    int numCols() const;
+    inline int numRows() const { return rows; }
+    inline int numCols() const { return cols; }
 
     void fill(double value);
 
@@ -44,8 +44,12 @@ public:
 
     // --- Matrix-specific operations ---
 
-    double get(int i, int j) const;
-    void set(int i, int j, double value);
+    inline double get(int i, int j) const {
+        return data[i * cols + j];
+    }
+    inline void set(int i, int j, double value) {
+        data[i * cols + j] = value;
+    }
 
     // Apply a function element-wise
     Matrix apply(const std::function<double(double)> &func) const;
