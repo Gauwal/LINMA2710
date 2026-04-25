@@ -1,0 +1,25 @@
+--- project/src/distributed_matrix.cpp
++++ project/src/distributed_matrix.cpp
+@@ -42,11 +42,19 @@
+ const Matrix& DistributedMatrix::getLocalData() const { return localData; }
+ 
+ double DistributedMatrix::get(int i, int j) const {
+-    return localData.get(i, j - startCol);
++    int localJ = j - startCol;
++    if (localJ >= 0 && localJ < localCols) {
++        return localData.get(i, localJ);
++    }
++    throw std::out_of_range("Col is not on this process");
+ }
+ 
+ void DistributedMatrix::set(int i, int j, double value) {
+-    localData.set(i, j - startCol, value);
++    int localJ = j - startCol;
++    if (localJ >= 0 && localJ < localCols) {
++        localData.set(i, localJ, value);
++        return;
++    }
++    throw std::out_of_range("Col is not on this process");
+ }
+ 
+ int DistributedMatrix::globalColIndex(int localColIdx) const {
