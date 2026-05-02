@@ -1,4 +1,5 @@
 #include "matrix_opencl.hpp"
+#include <iostream>
 
 std::shared_ptr<KernelCache> MatrixCL::kernels_ = nullptr;
 
