@@ -2,9 +2,27 @@
 
 std::shared_ptr<KernelCache> MatrixCL::kernels_ = nullptr;
 
-cl::Program buildProgram(cl::Context& context, const std::vector<cl::Device>& devices, const std::string& source) {
-    cl::Program program(context, source);
-    program.build(devices);
+cl::Program loadAndBuildProgram(cl::Context context,
+                                const std::vector<cl::Device>& devices,
+                                const std::string& sourceCode,
+                                const std::string& kernel_name_for_error)
+{
+    cl::Program program(context, sourceCode);
+    try {
+        program.build(devices);
+    } catch (const cl::BuildError& err) {
+        std::cerr << "OpenCL Build Error for kernel source '" << kernel_name_for_error << "':\n"
+                  << err.what() << "(" << err.err() << ")" << std::endl;
+        for (const auto& pair : err.getBuildLog()) {
+            std::cerr << "Device " << pair.first.getInfo<CL_DEVICE_NAME>() << ":" << std::endl;
+            std::cerr << pair.second << std::endl;
+        }
+        throw;
+    } catch (const cl::Error& err) {
+        std::cerr << "OpenCL Error during program build for '" << kernel_name_for_error << "': "
+                  << err.what() << " (" << err.err() << ")" << std::endl;
+        throw;
+    }
     return program;
 }
 
@@ -18,13 +36,13 @@ const std::string source_matrix_mul = R"(__kernel void kernel_func(__global cons
 
 void KernelCache::compileKernels(cl::Context context, const std::vector<cl::Device>& devices) {
     if (initialized) return;
-    kernel_fill = cl::Kernel(buildProgram(context, devices, source_fill), "kernel_func");
-    kernel_add = cl::Kernel(buildProgram(context, devices, source_add), "kernel_func");
-    kernel_sub = cl::Kernel(buildProgram(context, devices, source_sub), "kernel_func");
-    kernel_scalar_mul = cl::Kernel(buildProgram(context, devices, source_scalar_mul), "kernel_func");
-    kernel_sub_mul = cl::Kernel(buildProgram(context, devices, source_sub_mul), "kernel_func");
-    kernel_transpose = cl::Kernel(buildProgram(context, devices, source_transpose), "kernel_func");
-    kernel_matrix_mul = cl::Kernel(buildProgram(context, devices, source_matrix_mul), "kernel_func");
+    kernel_fill = cl::Kernel(loadAndBuildProgram(context, devices, source_fill, "fill"), "kernel_func");
+    kernel_add = cl::Kernel(loadAndBuildProgram(context, devices, source_add, "add"), "kernel_func");
+    kernel_sub = cl::Kernel(loadAndBuildProgram(context, devices, source_sub, "sub"), "kernel_func");
+    kernel_scalar_mul = cl::Kernel(loadAndBuildProgram(context, devices, source_scalar_mul, "scalar_mul"), "kernel_func");
+    kernel_sub_mul = cl::Kernel(loadAndBuildProgram(context, devices, source_sub_mul, "sub_mul"), "kernel_func");
+    kernel_transpose = cl::Kernel(loadAndBuildProgram(context, devices, source_transpose, "transpose"), "kernel_func");
+    kernel_matrix_mul = cl::Kernel(loadAndBuildProgram(context, devices, source_matrix_mul, "matrix_mul"), "kernel_func");
     initialized = true;
 }
 
