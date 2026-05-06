@@ -1,0 +1,21 @@
+=== OpenCL GPU Benchmark ===
+=== Part 4: OpenCL Matrix Multiplication Benchmark ===
+
+Platform: NVIDIA CUDA
+Device: NVIDIA A10
+Device Type: GPU
+Compute Units: 72
+Max Work Group Size: 1024
+Global Memory: 22502 MB
+
+=== Kernel Performance Comparison ===
+Size           Naive (ms)          Optimized (ms)      Speedup        Naive GFLOPs   Optimized GFLOPs
+----------------------------------------------------------------------------------------------------
+128            0.020               0.018               1.13           x210.58         238.76         
+256            0.094               0.070               1.34           x358.34         478.90         
+512            0.638               0.455               1.40           x420.76         589.80         
+1024           4.761               3.377               1.41           x451.10         635.98         
+
+Results saved to bench_opencl_results.csv
+
+Done!

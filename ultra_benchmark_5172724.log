@@ -1,0 +1,74 @@
+╔════════════════════════════════════════════════════════════════════╗
+║           LINMA2710 ULTRA-COMPREHENSIVE BENCHMARK SUITE           ║
+║              Extensive Data Collection & Analysis                  ║
+╚════════════════════════════════════════════════════════════════════╝
+
+Job ID: 5172724
+Start time: Wed May  6 14:51:34 CEST 2026
+Nodes: 1
+CPUs per task: 16
+Tasks: 4
+
+═══════════════════════════════════════════════════════════════════════
+COMPILATION PHASE
+═══════════════════════════════════════════════════════════════════════
+
+Compiling OpenMP ultra-comprehensive benchmark...
+bench_openmp_ultracomprehensive.cpp:160:34: warning: multi-character character constant [-Wmultichar]
+  160 |     std::cout << std::string(62, '─') << std::endl;
+      |                                  ^~~
+bench_openmp_ultracomprehensive.cpp:196:34: warning: multi-character character constant [-Wmultichar]
+  196 |     std::cout << std::string(64, '─') << std::endl;
+      |                                  ^~~
+bench_openmp_ultracomprehensive.cpp:214:34: warning: multi-character character constant [-Wmultichar]
+  214 |     std::cout << std::string(64, '─') << std::endl;
+      |                                  ^~~
+bench_openmp_ultracomprehensive.cpp:220:34: warning: multi-character character constant [-Wmultichar]
+  220 |     std::cout << std::string(64, '─') << std::endl;
+      |                                  ^~~
+bench_openmp_ultracomprehensive.cpp:252:34: warning: multi-character character constant [-Wmultichar]
+  252 |     std::cout << std::string(64, '─') << std::endl;
+      |                                  ^~~
+bench_openmp_ultracomprehensive.cpp:288:34: warning: multi-character character constant [-Wmultichar]
+  288 |     std::cout << std::string(64, '─') << std::endl;
+      |                                  ^~~
+bench_openmp_ultracomprehensive.cpp: In function ‘double measure_thread_overhead(int, int)’:
+bench_openmp_ultracomprehensive.cpp:36:15: error: ‘std::vector<double> Matrix::data’ is private within this context
+   36 |             B.data[i * size + j] *= 1.0001;
+      |               ^~~~
+In file included from bench_openmp_ultracomprehensive.cpp:1:
+/home/ucl/ingi/gsavary/LINMA2710/project/include/matrix.hpp:11:25: note: declared private here
+   11 |     std::vector<double> data;
+      |                         ^~~~
+bench_openmp_ultracomprehensive.cpp:47:26: error: ‘std::vector<double> Matrix::data’ is private within this context
+   47 |                 sum += A.data[i * size + k] * B.data[k * size + j];
+      |                          ^~~~
+/home/ucl/ingi/gsavary/LINMA2710/project/include/matrix.hpp:11:25: note: declared private here
+   11 |     std::vector<double> data;
+      |                         ^~~~
+bench_openmp_ultracomprehensive.cpp:47:49: error: ‘std::vector<double> Matrix::data’ is private within this context
+   47 |                 sum += A.data[i * size + k] * B.data[k * size + j];
+      |                                                 ^~~~
+/home/ucl/ingi/gsavary/LINMA2710/project/include/matrix.hpp:11:25: note: declared private here
+   11 |     std::vector<double> data;
+      |                         ^~~~
+bench_openmp_ultracomprehensive.cpp: In function ‘int main()’:
+bench_openmp_ultracomprehensive.cpp:160:34: warning: overflow in conversion from ‘int’ to ‘char’ changes value from ‘14849152’ to ‘-128’ [-Woverflow]
+  160 |     std::cout << std::string(62, '─') << std::endl;
+      |                                  ^~~
+bench_openmp_ultracomprehensive.cpp:196:34: warning: overflow in conversion from ‘int’ to ‘char’ changes value from ‘14849152’ to ‘-128’ [-Woverflow]
+  196 |     std::cout << std::string(64, '─') << std::endl;
+      |                                  ^~~
+bench_openmp_ultracomprehensive.cpp:214:34: warning: overflow in conversion from ‘int’ to ‘char’ changes value from ‘14849152’ to ‘-128’ [-Woverflow]
+  214 |     std::cout << std::string(64, '─') << std::endl;
+      |                                  ^~~
+bench_openmp_ultracomprehensive.cpp:220:34: warning: overflow in conversion from ‘int’ to ‘char’ changes value from ‘14849152’ to ‘-128’ [-Woverflow]
+  220 |     std::cout << std::string(64, '─') << std::endl;
+      |                                  ^~~
+bench_openmp_ultracomprehensive.cpp:252:34: warning: overflow in conversion from ‘int’ to ‘char’ changes value from ‘14849152’ to ‘-128’ [-Woverflow]
+  252 |     std::cout << std::string(64, '─') << std::endl;
+      |                                  ^~~
+bench_openmp_ultracomprehensive.cpp:288:34: warning: overflow in conversion from ‘int’ to ‘char’ changes value from ‘14849152’ to ‘-128’ [-Woverflow]
+  288 |     std::cout << std::string(64, '─') << std::endl;
+      |                                  ^~~
+❌ OpenMP compilation failed!

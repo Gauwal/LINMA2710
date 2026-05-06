@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LINMA2710: Parallel Computing Paradigms</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .presentation-container {
+            width: 100%;
+            max-width: 1000px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        .slide {
+            display: none;
+            padding: 60px;
+            min-height: 600px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            position: relative;
+        }
+        
+        .slide.active {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            animation: fadeIn 0.5s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .slide h1 {
+            font-size: 2.5em;
+            color: #2d3436;
+            margin-bottom: 20px;
+        }
+        
+        .slide h2 {
+            font-size: 2em;
+            color: #2d3436;
+            margin-bottom: 30px;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 15px;
+        }
+        
+        .slide h3 {
+            font-size: 1.5em;
+            color: #44546a;
+            margin: 20px 0 10px 0;
+        }
+        
+        .slide p, .slide li {
+            font-size: 1.1em;
+            line-height: 1.6;
+            color: #44546a;
+            margin: 10px 0;
+        }
+        
+        .slide ul, .slide ol {
+            margin-left: 30px;
+            margin-top: 15px;
+        }
+        
+        .slide li {
+            margin: 12px 0;
+        }
+        
+        .slide table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .slide th {
+            background: #667eea;
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-weight: bold;
+        }
+        
+        .slide td {
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .slide tr:hover {
+            background: #f9f9f9;
+        }
+        
+        .slide img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            margin: 20px 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        .title-slide {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+        }
+        
+        .title-slide h1 {
+            font-size: 3.5em;
+            color: white;
+            margin-bottom: 30px;
+        }
+        
+        .title-slide h2 {
+            font-size: 1.8em;
+            color: rgba(255,255,255,0.9);
+            border: none;
+            padding: 0;
+            margin-bottom: 30px;
+        }
+        
+        .title-slide p {
+            color: rgba(255,255,255,0.8);
+            font-size: 1.2em;
+            margin: 15px 0;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            background: #2d3436;
+            color: white;
+        }
+        
+        button {
+            padding: 10px 30px;
+            font-size: 1em;
+            border: none;
+            background: #667eea;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        button:hover {
+            background: #764ba2;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        
+        button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .slide-counter {
+            font-size: 1.1em;
+            font-weight: bold;
+        }
+        
+        .progress-bar {
+            height: 5px;
+            background: #2d3436;
+            width: 100%;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: #667eea;
+            transition: width 0.3s ease;
+        }
+        
+        code {
+            background: #f5f5f5;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            color: #d63031;
+        }
+        
+        .highlight {
+            background: #fff3cd;
+            padding: 20px;
+            border-left: 4px solid #ffc107;
+            margin: 15px 0;
+            border-radius: 3px;
+        }
+        
+        .metric {
+            display: inline-block;
+            background: white;
+            padding: 15px 25px;
+            margin: 10px 10px 10px 0;
+            border-radius: 5px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .metric-value {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #667eea;
+        }
+        
+        .metric-label {
+            font-size: 0.9em;
+            color: #666;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation-container">
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+        
+        <!-- Slide 1: Title -->
+        <div class="slide active title-slide">
+            <h1>Parallel Computing</h1>
+            <h2>Exploring 4 Computing Paradigms</h2>
+            <p><strong>LINMA2710 Project Presentation</strong></p>
+            <p style="margin-top: 40px; font-size: 1em;">Sequential • OpenMP • MPI • GPU</p>
+        </div>
+        
+        <!-- Slide 2: Overview -->
+        <div class="slide">
+            <h2>The Four Paradigms</h2>
+            <table>
+                <tr>
+                    <th>Paradigm</th>
+                    <th>Platform</th>
+                    <th>Parallelism</th>
+                    <th>Best For</th>
+                </tr>
+                <tr>
+                    <td><strong>Sequential</strong></td>
+                    <td>Single CPU</td>
+                    <td>None</td>
+                    <td>Baseline & debugging</td>
+                </tr>
+                <tr>
+                    <td><strong>OpenMP</strong></td>
+                    <td>Single machine</td>
+                    <td>Shared memory threads</td>
+                    <td>Multi-core parallelism</td>
+                </tr>
+                <tr>
+                    <td><strong>MPI</strong></td>
+                    <td>Cluster</td>
+                    <td>Distributed memory</td>
+                    <td>Scalability across nodes</td>
+                </tr>
+                <tr>
+                    <td><strong>OpenCL/GPU</strong></td>
+                    <td>GPU device</td>
+                    <td>Massive parallelism</td>
+                    <td>Data-parallel compute</td>
+                </tr>
+            </table>
+            <h3 style="margin-top: 40px;">Goal</h3>
+            <p>Implement matrix multiplication C = A × B on all four paradigms and compare performance</p>
+        </div>
+        
+        <!-- Slide 3: OpenMP Part 1&2 -->
+        <div class="slide">
+            <h2>Part 1 & 2: OpenMP Parallelism</h2>
+            <h3>Sequential + Parallel Implementation</h3>
+            <p><strong>Key Optimization:</strong> Transpose matrix B</p>
+            <ul>
+                <li>✓ Improves cache locality - read both matrices sequentially</li>
+                <li>✓ Enables SIMD auto-vectorization by compiler</li>
+                <li>✓ Implementation: <code>#pragma omp parallel for</code></li>
+            </ul>
+            
+            <h3>Parallelization Strategy</h3>
+            <p>Distribute outer loop iterations across threads:</p>
+            <div style="background: white; padding: 15px; border-radius: 5px; margin: 15px 0; font-family: monospace; font-size: 0.9em;">
+#pragma omp parallel for collapse(2)<br/>
+for (int i = 0; i &lt; n; i++)<br/>
+&nbsp;&nbsp;for (int j = 0; j &lt; n; j++)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;C[i][j] = dot product of A[i] and B_transposed[j]
+            </div>
+        </div>
+        
+        <!-- Slide 4: OpenMP Performance -->
+        <div class="slide">
+            <h2>OpenMP Results & Analysis</h2>
+            <h3>Performance Metrics</h3>
+            <div>
+                <div class="metric">
+                    <div class="metric-value">2.07</div>
+                    <div class="metric-label">GFLOPs (1000×1000, 1 thread)</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-value">~2.1</div>
+                    <div class="metric-label">GFLOPs (Peak performance)</div>
+                </div>
+            </div>
+            
+            <h3>Why Limited Speedup?</h3>
+            <p><strong>Amdahl's Law:</strong> Speedup = 1 / (f_s + f_p/P)</p>
+            <ul>
+                <li>Memory bandwidth saturation limits speedup</li>
+                <li>CPU can't feed data to cores fast enough</li>
+                <li>Thread overhead outweighs benefit for small matrices</li>
+            </ul>
+            
+            <div class="highlight">
+                <strong>Key Insight:</strong> This is memory-bound, not compute-bound. Adding more threads won't help if memory bandwidth is the bottleneck.
+            </div>
+        </div>
+        
+        <!-- Slide 5: MPI Distributed -->
+        <div class="slide">
+            <h2>Part 3: MPI Distributed Computing</h2>
+            <h3>Column-wise Matrix Partitioning</h3>
+            <p>Each MPI process handles a subset of result columns:</p>
+            <ul>
+                <li><strong>Process 0:</strong> Columns 0 to n/p-1</li>
+                <li><strong>Process 1:</strong> Columns n/p to 2n/p-1</li>
+                <li><strong>...</strong></li>
+            </ul>
+            
+            <h3>Algorithm</h3>
+            <ol>
+                <li>Broadcast matrices A and B to all processes</li>
+                <li>Each process computes its portion locally</li>
+                <li>MPI_Allreduce gathers all results</li>
+                <li>Root process has complete result</li>
+            </ol>
+            
+            <h3>Expected Benefits</h3>
+            <ul>
+                <li>Computation runs in parallel on N processes</li>
+                <li>Communication overhead: O(n²) gather (small relative to computation)</li>
+            </ul>
+        </div>
+        
+        <!-- Slide 6: MPI Performance -->
+        <div class="slide">
+            <h2>MPI Results & Analysis</h2>
+            <h3>Performance Metrics</h3>
+            <div>
+                <div class="metric">
+                    <div class="metric-value">3.51</div>
+                    <div class="metric-label">GFLOPs (1000×1000, 4 procs)</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-value">&lt;1µs</div>
+                    <div class="metric-label">Communication time</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-value">0%</div>
+                    <div class="metric-label">Comm % of total</div>
+                </div>
+            </div>
+            
+            <h3>Why MPI Outperforms Sequential</h3>
+            <ul>
+                <li>✓ 4 processes compute simultaneously</li>
+                <li>✓ Each handles 1/4 of the work</li>
+                <li>✓ Allreduce is extremely fast for single gather</li>
+                <li>✓ 1.7× speedup vs sequential (strong scaling)</li>
+            </ul>
+            
+            <div class="highlight">
+                <strong>Key Insight:</strong> Column partitioning eliminates communication bottleneck. Communication is negligible!
+            </div>
+        </div>
+        
+        <!-- Slide 7: GPU OpenCL -->
+        <div class="slide">
+            <h2>Part 4: GPU Computing with OpenCL</h2>
+            <h3>Two Kernel Implementations</h3>
+            
+            <h3>Naive Kernel (Global Memory Only)</h3>
+            <div style="background: #f5f5f5; padding: 15px; border-radius: 5px; margin: 10px 0; font-family: monospace; font-size: 0.85em;">
+__kernel void matmul_naive(__global float* A, __global float* B,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;__global float* C, int n) {<br/>
+&nbsp;&nbsp;int i = get_global_id(0), j = get_global_id(1);<br/>
+&nbsp;&nbsp;float sum = 0.0f;<br/>
+&nbsp;&nbsp;for(int k = 0; k &lt; n; k++)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;sum += A[i*n + k] * B[k*n + j];<br/>
+&nbsp;&nbsp;C[i*n + j] = sum;<br/>
+}
+            </div>
+            
+            <h3>Optimized Kernel (Local Memory Tiling)</h3>
+            <p>Load tiles into fast local memory (16×16 blocks)</p>
+            <ul>
+                <li>Reduces global memory bandwidth by ~16×</li>
+                <li>Work-group synchronization for data coherency</li>
+                <li>Expected speedup: 2-4× vs naive</li>
+            </ul>
+        </div>
+        
+        <!-- Slide 8: GPU Performance -->
+        <div class="slide">
+            <h2>GPU Results & Analysis</h2>
+            <h3>Kernel Optimization Impact</h3>
+            <table>
+                <tr>
+                    <th>Kernel</th>
+                    <th>Memory Model</th>
+                    <th>Est. Performance</th>
+                    <th>Speedup</th>
+                </tr>
+                <tr>
+                    <td><strong>Naive</strong></td>
+                    <td>Global only</td>
+                    <td>~Y GFLOPs</td>
+                    <td>1.0×</td>
+                </tr>
+                <tr>
+                    <td><strong>Optimized</strong></td>
+                    <td>Local + Global</td>
+                    <td>~W GFLOPs</td>
+                    <td>~2-4×</td>
+                </tr>
+            </table>
+            
+            <h3>Why Local Memory Matters</h3>
+            <ul>
+                <li><strong>Global Memory:</strong> 100-200 GB/s (shared across all cores)</li>
+                <li><strong>Local Memory:</strong> 1-10 TB/s (on-chip, per work-group)</li>
+                <li><strong>Result:</strong> 50-100× bandwidth improvement!</li>
+            </ul>
+        </div>
+        
+        <!-- Slide 9: Data Transfer -->
+        <div class="slide">
+            <h2>GPU Data Transfer Analysis</h2>
+            <h3>The Hidden Cost</h3>
+            <ul>
+                <li><strong>PCIe Bandwidth:</strong> ~16 GB/s (PCIe 4.0)</li>
+                <li>1000×1000 matrix: 24 MB data (3 matrices × 8 bytes)</li>
+                <li>Transfer time: ~1.5 ms (much faster than computation!)</li>
+                <li><strong>BUT:</strong> Only amortized over repeated operations</li>
+            </ul>
+            
+            <h3>When GPU Makes Sense</h3>
+            <p>GPU best when: Computation time >> Transfer time</p>
+            <ul>
+                <li>✓ Large matrices (&gt; 2000×2000)</li>
+                <li>✓ Multiple operations on same data</li>
+                <li>✓ Streaming data (video processing)</li>
+                <li>✗ One-time small operations</li>
+            </ul>
+        </div>
+        
+        <!-- Slide 10: Cross-Paradigm Comparison -->
+        <div class="slide">
+            <h2>Cross-Paradigm Comparison</h2>
+            <h3>Performance Summary (1000×1000 matrix)</h3>
+            <table>
+                <tr>
+                    <th>Paradigm</th>
+                    <th>Platform</th>
+                    <th>Performance</th>
+                    <th>Scalability</th>
+                </tr>
+                <tr>
+                    <td><strong>Sequential</strong></td>
+                    <td>1 CPU core</td>
+                    <td>2.1 GFLOPs</td>
+                    <td>Baseline</td>
+                </tr>
+                <tr>
+                    <td><strong>OpenMP</strong></td>
+                    <td>8 cores (shared)</td>
+                    <td>~2.1 GFLOPs</td>
+                    <td>Poor (memory-bound)</td>
+                </tr>
+                <tr>
+                    <td><strong>MPI</strong></td>
+                    <td>4 nodes</td>
+                    <td>3.5 GFLOPs</td>
+                    <td>Good (1.7× speedup)</td>
+                </tr>
+                <tr>
+                    <td><strong>GPU/OpenCL</strong></td>
+                    <td>1 GPU</td>
+                    <td>~50+ GFLOPs*</td>
+                    <td>Excellent</td>
+                </tr>
+            </table>
+            <p style="font-size: 0.9em; margin-top: 20px;">* Estimate; varies by GPU architecture</p>
+        </div>
+        
+        <!-- Slide 11: Trade-offs -->
+        <div class="slide">
+            <h2>Paradigm Trade-offs</h2>
+            <h3>When to Use Each</h3>
+            <table>
+                <tr>
+                    <th>Paradigm</th>
+                    <th>Programming</th>
+                    <th>Performance</th>
+                    <th>Scalability</th>
+                    <th>Portability</th>
+                </tr>
+                <tr>
+                    <td><strong>Sequential</strong></td>
+                    <td>Easy</td>
+                    <td>Low</td>
+                    <td>None</td>
+                    <td>Excellent</td>
+                </tr>
+                <tr>
+                    <td><strong>OpenMP</strong></td>
+                    <td>Easy</td>
+                    <td>Medium</td>
+                    <td>Limited</td>
+                    <td>Good</td>
+                </tr>
+                <tr>
+                    <td><strong>MPI</strong></td>
+                    <td>Hard</td>
+                    <td>High</td>
+                    <td>Excellent</td>
+                    <td>Good</td>
+                </tr>
+                <tr>
+                    <td><strong>GPU</strong></td>
+                    <td>Hard</td>
+                    <td>Very High</td>
+                    <td>Very Good</td>
+                    <td>Fair</td>
+                </tr>
+            </table>
+        </div>
+        
+        <!-- Slide 12: Lessons Learned -->
+        <div class="slide">
+            <h2>Lessons Learned</h2>
+            <h3>Key Takeaways</h3>
+            <ol>
+                <li><strong>Cache Locality Matters:</strong> Simple transpose improved performance significantly</li>
+                <li><strong>Measure Communication:</strong> MPI showed communication is negligible with smart partitioning</li>
+                <li><strong>Memory is the Bottleneck:</strong> OpenMP speedup limited by bandwidth, not computation</li>
+                <li><strong>Different Problems, Different Solutions:</strong> No one paradigm beats all</li>
+                <li><strong>Amdahl's Law is Real:</strong> Speedup limited by sequential fraction</li>
+            </ol>
+        </div>
+        
+        <!-- Slide 13: Design Decisions -->
+        <div class="slide">
+            <h2>Why These Design Choices?</h2>
+            <h3>Sequential: Matrix Transpose</h3>
+            <ul>
+                <li>Sequential access to both A and B improves cache hits</li>
+                <li>Enables compiler SIMD optimization</li>
+                <li>Small overhead (O(n²) one-time cost)</li>
+            </ul>
+            
+            <h3>MPI: Column Partitioning</h3>
+            <ul>
+                <li>Each process owns full rows (cache-friendly access)</li>
+                <li>Only needs single MPI_Allreduce (minimal communication)</li>
+                <li>Easy to implement and understand</li>
+            </ul>
+            
+            <h3>GPU: Local Memory Tiling</h3>
+            <ul>
+                <li>Dramatic bandwidth improvement (50-100×)</li>
+                <li>Work-group synchronization ensures correctness</li>
+                <li>Standard GPU optimization technique</li>
+            </ul>
+        </div>
+        
+        <!-- Slide 14: Questions -->
+        <div class="slide">
+            <h2>Common Questions</h2>
+            <h3>Q: Why not use GPU for everything?</h3>
+            <p>A: Data transfer overhead, not all problems are data-parallel, programming complexity</p>
+            
+            <h3>Q: How would this scale to very large matrices?</h3>
+            <p>A: GPU memory limits (~10GB), would need MPI+GPU hybrid approach</p>
+            
+            <h3>Q: Why did OpenMP not scale better?</h3>
+            <p>A: Memory-bound operation - CPU bandwidth is shared across cores</p>
+            
+            <h3>Q: Which paradigm is "fastest"?</h3>
+            <p>A: Depends on problem size and platform. GPU best for large matrices, MPI best for multi-node scalability</p>
+        </div>
+        
+        <!-- Slide 15: Conclusion -->
+        <div class="slide title-slide">
+            <h1>Summary</h1>
+            <p style="font-size: 1.2em; margin: 30px 0;">
+                Four computing paradigms,<br/>
+                each with unique strengths and trade-offs
+            </p>
+            <p style="margin: 40px 0;">
+                <strong>Sequential</strong> • <strong>OpenMP</strong> • <strong>MPI</strong> • <strong>GPU</strong>
+            </p>
+            <p style="font-size: 1em; margin-top: 50px;">
+                Choose the right tool for the right problem
+            </p>
+        </div>
+        
+        <div class="nav-buttons">
+            <button id="prevBtn" onclick="changeSlide(-1)">← Previous</button>
+            <span class="slide-counter">
+                <span id="currentSlide">1</span> / <span id="totalSlides">15</span>
+            </span>
+            <button id="nextBtn" onclick="changeSlide(1)">Next →</button>
+        </div>
+    </div>
+    
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        
+        document.getElementById('totalSlides').textContent = totalSlides;
+        
+        function showSlide(n) {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (n + totalSlides) % totalSlides;
+            slides[currentSlide].classList.add('active');
+            
+            document.getElementById('currentSlide').textContent = currentSlide + 1;
+            
+            // Update progress bar
+            const progress = ((currentSlide + 1) / totalSlides) * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+            
+            // Update button states
+            document.getElementById('prevBtn').disabled = currentSlide === 0;
+            document.getElementById('nextBtn').disabled = currentSlide === totalSlides - 1;
+        }
+        
+        function changeSlide(n) {
+            showSlide(currentSlide + n);
+        }
+        
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') changeSlide(-1);
+            if (e.key === 'ArrowRight') changeSlide(1);
+        });
+        
+        // Initialize
+        showSlide(0);
+    </script>
+</body>
+</html>

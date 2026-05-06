@@ -1,0 +1,69 @@
+╔═══════════════════════════════════════════════════════════╗
+║  JOB A: Comprehensive Benchmark Sizes 50-400             ║
+║  OpenMP: 8 sizes × adaptive threads × 5 runs each        ║
+╚═══════════════════════════════════════════════════════════╝
+
+Starting benchmarks...
+
+╔═══════════════════════════════════════════════════════════╗
+║  COMPREHENSIVE BENCHMARK JOB A: Sizes 50-400             ║
+║  OpenMP: Full thread scaling + 5 runs per config         ║
+╚═══════════════════════════════════════════════════════════╝
+
+System: 16 available cores
+Testing: 8 sizes × 5 thread counts × 5 runs = 200 total benchmark runs
+
+Size 50×50:
+  Size   50 | Threads  1 |     0.00ms |  448.83 GF
+  Size   50 | Threads  2 |     0.00ms |  378.21 GF
+  Size   50 | Threads  4 |     0.00ms |  194.40 GF
+  Size   50 | Threads  8 |     0.00ms |  103.56 GF
+  Size   50 | Threads 16 |     0.00ms |  115.69 GF
+Size 100×100:
+  Size  100 | Threads  1 |     0.00ms | 4938.27 GF
+  Size  100 | Threads  2 |     0.00ms | 2339.18 GF
+  Size  100 | Threads  4 |     0.00ms | 1141.55 GF
+  Size  100 | Threads  8 |     0.00ms | 1267.43 GF
+  Size  100 | Threads 16 |     0.00ms |  970.40 GF
+Size 150×150:
+  Size  150 | Threads  1 |     0.00ms | 16033.25 GF
+  Size  150 | Threads  2 |     0.00ms | 8333.33 GF
+  Size  150 | Threads  4 |     0.00ms | 2862.60 GF
+  Size  150 | Threads  8 |     0.00ms | 3648.65 GF
+  Size  150 | Threads 16 |     0.00ms | 3619.30 GF
+Size 200×200:
+  Size  200 | Threads  1 |     0.00ms | 34261.24 GF
+  Size  200 | Threads  2 |     0.00ms | 17448.20 GF
+  Size  200 | Threads  4 |     0.00ms | 8217.77 GF
+  Size  200 | Threads  8 |     0.00ms | 8781.56 GF
+  Size  200 | Threads 16 |     0.00ms | 8488.06 GF
+Size 250×250:
+  Size  250 | Threads  1 |     0.00ms | 65928.27 GF
+  Size  250 | Threads  2 |     0.00ms | 36592.51 GF
+  Size  250 | Threads  4 |     0.00ms | 17887.81 GF
+  Size  250 | Threads  8 |     0.00ms | 19531.25 GF
+  Size  250 | Threads 16 |     0.00ms | 14768.43 GF
+Size 300×300:
+  Size  300 | Threads  1 |     0.00ms | 119469.03 GF
+  Size  300 | Threads  2 |     0.00ms | 59800.66 GF
+  Size  300 | Threads  4 |     0.00ms | 34771.41 GF
+  Size  300 | Threads  8 |     0.00ms | 34307.50 GF
+  Size  300 | Threads 16 |     0.00ms | 27593.25 GF
+Size 350×350:
+  Size  350 | Threads  1 |     0.00ms | 190555.56 GF
+  Size  350 | Threads  2 |     0.00ms | 87858.61 GF
+  Size  350 | Threads  4 |     0.00ms | 43638.68 GF
+  Size  350 | Threads  8 |     0.00ms | 34829.41 GF
+  Size  350 | Threads 16 |     0.00ms | 47349.53 GF
+Size 400×400:
+  Size  400 | Threads  1 |     0.00ms | 283185.84 GF
+  Size  400 | Threads  2 |     0.00ms | 142857.14 GF
+  Size  400 | Threads  4 |     0.00ms | 97709.92 GF
+  Size  400 | Threads  8 |     0.00ms | 77669.90 GF
+  Size  400 | Threads 16 |     0.00ms | 71548.35 GF
+
+✓ Results saved: comprehensive_results_50_400.csv
+✓ Completed 40 OpenMP measurements
+
+-rw-r--r-- 1 gsavary gsavary 1.7K May  6 16:48 comprehensive_results_50_400.csv
+✓ Job A complete!

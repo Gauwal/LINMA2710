@@ -51,6 +51,10 @@ public:
         data[i * cols + j] = value;
     }
 
+    // Get raw pointer to data (for performance-critical code)
+    inline double* getData() { return data.data(); }
+    inline const double* getData() const { return data.data(); }
+
     // Apply a function element-wise
     Matrix apply(const std::function<double(double)> &func) const;
 };

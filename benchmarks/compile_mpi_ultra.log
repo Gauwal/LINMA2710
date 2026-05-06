@@ -1,0 +1,31 @@
+bench_mpi_ultracomprehensive.cpp:131:38: warning: multi-character character constant [-Wmultichar]
+  131 |         std::cout << std::string(85, '─') << std::endl;
+      |                                      ^~~
+bench_mpi_ultracomprehensive.cpp:169:38: warning: multi-character character constant [-Wmultichar]
+  169 |         std::cout << std::string(64, '─') << std::endl;
+      |                                      ^~~
+bench_mpi_ultracomprehensive.cpp:189:38: warning: multi-character character constant [-Wmultichar]
+  189 |         std::cout << std::string(64, '─') << std::endl;
+      |                                      ^~~
+bench_mpi_ultracomprehensive.cpp:194:38: warning: multi-character character constant [-Wmultichar]
+  194 |         std::cout << std::string(64, '─') << std::endl;
+      |                                      ^~~
+bench_mpi_ultracomprehensive.cpp:206:38: warning: multi-character character constant [-Wmultichar]
+  206 |         std::cout << std::string(64, '─') << std::endl;
+      |                                      ^~~
+bench_mpi_ultracomprehensive.cpp: In function ‘int main(int, char**)’:
+bench_mpi_ultracomprehensive.cpp:131:38: warning: overflow in conversion from ‘int’ to ‘char’ changes value from ‘14849152’ to ‘-128’ [-Woverflow]
+  131 |         std::cout << std::string(85, '─') << std::endl;
+      |                                      ^~~
+bench_mpi_ultracomprehensive.cpp:169:38: warning: overflow in conversion from ‘int’ to ‘char’ changes value from ‘14849152’ to ‘-128’ [-Woverflow]
+  169 |         std::cout << std::string(64, '─') << std::endl;
+      |                                      ^~~
+bench_mpi_ultracomprehensive.cpp:189:38: warning: overflow in conversion from ‘int’ to ‘char’ changes value from ‘14849152’ to ‘-128’ [-Woverflow]
+  189 |         std::cout << std::string(64, '─') << std::endl;
+      |                                      ^~~
+bench_mpi_ultracomprehensive.cpp:194:38: warning: overflow in conversion from ‘int’ to ‘char’ changes value from ‘14849152’ to ‘-128’ [-Woverflow]
+  194 |         std::cout << std::string(64, '─') << std::endl;
+      |                                      ^~~
+bench_mpi_ultracomprehensive.cpp:206:38: warning: overflow in conversion from ‘int’ to ‘char’ changes value from ‘14849152’ to ‘-128’ [-Woverflow]
+  206 |         std::cout << std::string(64, '─') << std::endl;
+      |                                      ^~~

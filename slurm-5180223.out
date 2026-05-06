@@ -1,0 +1,57 @@
+╔════════════════════════════════════════════════════╗
+║  BENCHMARK JOB C: Sizes 1100-2000 (15 mins)       ║
+╚════════════════════════════════════════════════════╝
+Running...
+
+╔════════════════════════════════════════════════╗
+║   BENCHMARK JOB C: Sizes 1100-2000           ║
+║   (8 matrix sizes × 4 threads × 5 runs)      ║
+╚════════════════════════════════════════════════╝
+
+Total: 8 sizes × 4 threads = 32 tests
+
+Size 1100×1100:
+  Size 1100 | Threads  1 |     0.00ms | 2662000.00 GFLOPs
+  Size 1100 | Threads  2 |     0.00ms | 3558823.53 GFLOPs
+  Size 1100 | Threads  4 |     0.00ms | 1092775.04 GFLOPs
+  Size 1100 | Threads  8 |     0.00ms | 1963126.84 GFLOPs
+Size 1200×1200:
+  Size 1200 | Threads  1 |     0.00ms | 2208306.71 GFLOPs
+  Size 1200 | Threads  2 |     0.00ms | 4298507.46 GFLOPs
+  Size 1200 | Threads  4 |     0.00ms | 2943781.94 GFLOPs
+  Size 1200 | Threads  8 |     0.00ms | 2926333.62 GFLOPs
+Size 1300×1300:
+  Size 1300 | Threads  1 |     0.00ms | 9078512.40 GFLOPs
+  Size 1300 | Threads  2 |     0.00ms | 6128312.41 GFLOPs
+  Size 1300 | Threads  4 |     0.00ms | 4153119.09 GFLOPs
+  Size 1300 | Threads  8 |     0.00ms | 3414141.41 GFLOPs
+Size 1400×1400:
+  Size 1400 | Threads  1 |     0.00ms | 13685785.54 GFLOPs
+  Size 1400 | Threads  2 |     0.00ms | 6903144.65 GFLOPs
+  Size 1400 | Threads  4 |     0.00ms | 5086190.92 GFLOPs
+  Size 1400 | Threads  8 |     0.00ms | 3524727.04 GFLOPs
+Size 1500×1500:
+  Size 1500 | Threads  1 |     0.00ms | 17002518.89 GFLOPs
+  Size 1500 | Threads  2 |     0.00ms | 9427374.30 GFLOPs
+  Size 1500 | Threads  4 |     0.00ms | 6559766.76 GFLOPs
+  Size 1500 | Threads  8 |     0.00ms | 4804270.46 GFLOPs
+Size 1600×1600:
+  Size 1600 | Threads  1 |     0.00ms | 20277227.72 GFLOPs
+  Size 1600 | Threads  2 |     0.00ms | 11603399.43 GFLOPs
+  Size 1600 | Threads  4 |     0.00ms | 7393501.81 GFLOPs
+  Size 1600 | Threads  8 |     0.00ms | 5975200.58 GFLOPs
+Size 1800×1800:
+  Size 1800 | Threads  1 |     0.00ms | 26270270.27 GFLOPs
+  Size 1800 | Threads  2 |     0.00ms | 15387862.80 GFLOPs
+  Size 1800 | Threads  4 |     0.00ms | 7886409.74 GFLOPs
+  Size 1800 | Threads  8 |     0.00ms | 8470588.24 GFLOPs
+Size 2000×2000:
+  Size 2000 | Threads  1 |     0.00ms | 38834951.46 GFLOPs
+  Size 2000 | Threads  2 |     0.00ms | 23598820.06 GFLOPs
+  Size 2000 | Threads  4 |     0.00ms | 12965964.34 GFLOPs
+  Size 2000 | Threads  8 |     0.00ms | 12728719.17 GFLOPs
+
+✓ Results saved: results_sizes_1100_2000.csv
+
+-rw-r--r-- 1 gsavary gsavary 926 May  6 16:41 results_sizes_1100_2000.csv
+✓ Done!

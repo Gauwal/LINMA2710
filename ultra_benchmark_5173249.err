@@ -1,0 +1,5 @@
+tee: ultra_benchmark_results/openmp_ultra.log: No such file or directory
+
+real	1m55.318s
+user	5m20.024s
+sys	0m1.570s

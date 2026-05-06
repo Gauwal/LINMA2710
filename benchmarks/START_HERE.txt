@@ -1,0 +1,231 @@
+╔════════════════════════════════════════════════════════════════════════════════╗
+║           LINMA2710 PROJECT - COMPLETE BENCHMARKING SETUP ✓                     ║
+║                                                                                  ║
+║  Everything you need to generate presentation figures and profiling data        ║
+╚════════════════════════════════════════════════════════════════════════════════╝
+
+📍 LOCATION: /home/ucl/ingi/gsavary/LINMA2710/benchmarks/
+
+================================================================================
+🚀 QUICK START (Run this now!)
+================================================================================
+
+1. Connect to cluster:
+   $ ssh manneback
+
+2. Request GPU:
+   $ salloc --partition=gpu --gres=gpu:1 --time=2:00:00 --mem-per-cpu=2000
+
+3. Load modules:
+   $ module load CUDA
+   $ module load Python
+
+4. Navigate and run:
+   $ cd ~/LINMA2710/benchmarks
+   $ bash run_all_benchmarks.sh
+
+✨ Result: 5 PNG figures + 3 CSV files generated in ~3-5 minutes
+
+================================================================================
+📦 WHAT YOU HAVE
+================================================================================
+
+✓ THREE BENCHMARK PROGRAMS
+  • bench_openmp.cpp    - OpenMP parallelism testing
+  • bench_mpi.cpp       - Distributed computing with MPI
+  • bench_opencl.cpp    - GPU computing with OpenCL
+
+✓ FOUR DOCUMENTATION FILES
+  • README.md                    - Complete benchmarking guide
+  • BENCHMARK_COMPLETE.md        - Setup and execution guide
+  • PROFILING_GUIDE.md           - Advanced profiling instructions
+  • PRESENTATION_CHEATSHEET.md   - Quick reference for exam day
+
+✓ BUILD & RUN SCRIPTS
+  • Makefile                  - Compilation recipes
+  • run_all_benchmarks.sh     - Master benchmark runner
+  • submit_manneback.slurm    - SLURM job script
+  • submit_lyra.slurm         - Lyra cluster script
+
+✓ VISUALIZATION TOOLS
+  • plot_results.py              - Generates 5 presentation figures
+  • generate_profiling_setup.py  - Advanced profiling setup
+
+================================================================================
+🎯 EXPECTED OUTPUT (After running benchmarks)
+================================================================================
+
+CSV Files (Raw Data):
+  ✓ bench_openmp_results.csv
+  ✓ bench_mpi_results.csv
+  ✓ bench_opencl_results.csv
+
+PNG Figures (For Slides):
+  ✓ figures/01_openmp_speedup.png           - Speedup analysis
+  ✓ figures/02_mpi_communication.png        - Communication breakdown
+  ✓ figures/03_opencl_kernels.png           - GPU kernel comparison
+  ✓ figures/04_gflops_comparison.png        - Cross-paradigm view
+  ✓ figures/05_summary_table.png            - Key metrics table
+
+================================================================================
+📊 WHAT EACH FIGURE SHOWS (For Your Presentation)
+================================================================================
+
+[01] OPENMP SPEEDUP
+    Left panel:  Speedup vs threads (different matrix sizes)
+    Right panel: GFLOPs vs matrix size
+    Talk point: "Speedup plateaus due to Amdahl's law - sequential section limits
+                 parallelization. Small matrices have parallelization overhead."
+
+[02] MPI COMMUNICATION
+    Left panel:  Communication vs computation time (stacked bars)
+    Right panel: Communication % vs matrix size
+    Talk point: "Communication is only Z% of total time for large matrices,
+                 showing effective column-based partitioning."
+
+[03] OPENCL KERNELS
+    Left panel:  Naive vs Optimized kernel timing
+    Right panel: Speedup of optimized kernel
+    Talk point: "Optimization using local memory and tiling achieves W×
+                 speedup, reducing global memory bandwidth pressure."
+
+[04] GFLOPS COMPARISON
+    All three paradigms on same chart
+    Talk point: "Each paradigm excels at different scales:
+                 - OpenMP: simple, single-node
+                 - MPI: scales across nodes
+                 - OpenCL: peak performance with GPU"
+
+[05] SUMMARY TABLE
+    Key metrics from each paradigm
+    Talk point: "This table summarizes best performance achieved in each
+                 category, showing practical trade-offs."
+
+================================================================================
+⏱️  PRESENTATION TIMING GUIDE (5 minutes total)
+================================================================================
+
+[0:00-0:30] Introduction
+  • Overview of 4 computing paradigms
+  • Show table: Sequential → OpenMP → MPI → OpenCL
+
+[0:30-2:00] Part 1 & 2: OpenMP (1.5 min)
+  • Design choice: transpose for cache + SIMD
+  • Figure: 01_openmp_speedup.png
+  • Key number: "__x speedup on 8 threads"
+  • Insight: Amdahl's law
+
+[2:00-3:30] Part 3: MPI (1.5 min)
+  • Algorithm: column-wise partitioning
+  • Figure: 02_mpi_communication.png
+  • Key number: "__% communication overhead"
+  • Insight: local work >> network bandwidth
+
+[3:30-4:30] Part 4: OpenCL (1 min)
+  • GPU kernels: naive vs optimized
+  • Figure: 03_opencl_kernels.png
+  • Key number: "__x speedup with local memory"
+  • Insight: GPU bandwidth much higher than CPU
+
+[4:30-5:00] Summary (30 sec)
+  • Figure: 04_gflops_comparison.png
+  • Trade-offs between approaches
+  • Conclusion: value of understanding all 4
+
+================================================================================
+📋 BEFORE YOUR ORAL EXAM - MEMORIZE THESE NUMBERS
+================================================================================
+
+Fill these in from your benchmark output:
+
+OpenMP:
+  ☐ Speedup at 8 threads:       __________ x
+  ☐ Peak GFLOPs:                __________ GFLOP/s
+  ☐ Break-even matrix size:     __________ x __________
+
+MPI:
+  ☐ Communication overhead %:   __________ %
+  ☐ Processes used:             4
+  ☐ Matrix size tested:         1000 x 1000
+
+OpenCL:
+  ☐ Optimized vs naive speedup: __________ x
+  ☐ GPU device name:            __________________
+  ☐ Compute units:              __________
+
+================================================================================
+🔧 TROUBLESHOOTING
+================================================================================
+
+❌ "No OpenCL devices found"
+   ✓ Check: module list | grep CUDA
+   ✓ Run: nvidia-smi
+
+❌ "MPI compilation error"
+   ✓ Check: which mpic++
+   ✓ Try: module load OpenMPI
+
+❌ "Python plotting fails"
+   ✓ Try: pip install --user matplotlib pandas
+   ✓ Or: module load Python
+
+❌ "Results look wrong"
+   ✓ Check CSV files: cat bench_openmp_results.csv
+   ✓ Verify matrix sizes: grep "200\|500\|1000\|2000"
+
+================================================================================
+📚 DOCUMENTATION MAP
+================================================================================
+
+Start Here:
+  → README.md (complete guide)
+  → BENCHMARK_COMPLETE.md (quick start with timeline)
+
+Presentation Prep:
+  → PRESENTATION_CHEATSHEET.md (Q&A answers, talking points)
+  → Figures in figures/ directory
+
+Advanced Topics:
+  → PROFILING_GUIDE.md (perf, nvprof, MPI tracing)
+  → generate_profiling_setup.py (creates profiling scripts)
+
+================================================================================
+✅ NEXT STEPS
+================================================================================
+
+1. ✓ Benchmarking setup complete
+2. → Run benchmarks on cluster (bash run_all_benchmarks.sh)
+3. → Collect key metrics from CSV files
+4. → Review generated PNG figures
+5. → Create presentation slides with figures
+6. → Practice presentation (keep to 5 minutes!)
+7. → Memorize key numbers from PRESENTATION_CHEATSHEET.md
+8. → Submit slides to Moodle by May 11, 6pm
+
+================================================================================
+📞 IF YOU NEED HELP
+================================================================================
+
+Error or question? Check these files:
+  • PROFILING_GUIDE.md - Common issues and solutions
+  • README.md - Detailed explanations
+  • PRESENTATION_CHEATSHEET.md - Q&A scenarios
+
+Contact TAs:
+  • Benoit Loucheur: benoit.loucheur@uclouvain.be
+  • Antonin Oswald: antonin.oswald@uclouvain.be
+  • Amir Bayat: amir.bayat@uclouvain.be
+
+================================================================================
+
+🎉 YOU'RE READY! 
+
+Everything is set up. All you need to do is:
+1. Run on cluster: bash run_all_benchmarks.sh
+2. Grab your 5 PNG figures
+3. Create slides
+4. Practice and present
+
+Good luck! 🚀
+
+================================================================================

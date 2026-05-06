@@ -1,0 +1,37 @@
+bench_openmp_ultracomprehensive.cpp:163:34: warning: multi-character character constant [-Wmultichar]
+  163 |     std::cout << std::string(62, '─') << std::endl;
+      |                                  ^~~
+bench_openmp_ultracomprehensive.cpp:199:34: warning: multi-character character constant [-Wmultichar]
+  199 |     std::cout << std::string(64, '─') << std::endl;
+      |                                  ^~~
+bench_openmp_ultracomprehensive.cpp:217:34: warning: multi-character character constant [-Wmultichar]
+  217 |     std::cout << std::string(64, '─') << std::endl;
+      |                                  ^~~
+bench_openmp_ultracomprehensive.cpp:223:34: warning: multi-character character constant [-Wmultichar]
+  223 |     std::cout << std::string(64, '─') << std::endl;
+      |                                  ^~~
+bench_openmp_ultracomprehensive.cpp:255:34: warning: multi-character character constant [-Wmultichar]
+  255 |     std::cout << std::string(64, '─') << std::endl;
+      |                                  ^~~
+bench_openmp_ultracomprehensive.cpp:291:34: warning: multi-character character constant [-Wmultichar]
+  291 |     std::cout << std::string(64, '─') << std::endl;
+      |                                  ^~~
+bench_openmp_ultracomprehensive.cpp: In function ‘int main()’:
+bench_openmp_ultracomprehensive.cpp:163:34: warning: overflow in conversion from ‘int’ to ‘char’ changes value from ‘14849152’ to ‘-128’ [-Woverflow]
+  163 |     std::cout << std::string(62, '─') << std::endl;
+      |                                  ^~~
+bench_openmp_ultracomprehensive.cpp:199:34: warning: overflow in conversion from ‘int’ to ‘char’ changes value from ‘14849152’ to ‘-128’ [-Woverflow]
+  199 |     std::cout << std::string(64, '─') << std::endl;
+      |                                  ^~~
+bench_openmp_ultracomprehensive.cpp:217:34: warning: overflow in conversion from ‘int’ to ‘char’ changes value from ‘14849152’ to ‘-128’ [-Woverflow]
+  217 |     std::cout << std::string(64, '─') << std::endl;
+      |                                  ^~~
+bench_openmp_ultracomprehensive.cpp:223:34: warning: overflow in conversion from ‘int’ to ‘char’ changes value from ‘14849152’ to ‘-128’ [-Woverflow]
+  223 |     std::cout << std::string(64, '─') << std::endl;
+      |                                  ^~~
+bench_openmp_ultracomprehensive.cpp:255:34: warning: overflow in conversion from ‘int’ to ‘char’ changes value from ‘14849152’ to ‘-128’ [-Woverflow]
+  255 |     std::cout << std::string(64, '─') << std::endl;
+      |                                  ^~~
+bench_openmp_ultracomprehensive.cpp:291:34: warning: overflow in conversion from ‘int’ to ‘char’ changes value from ‘14849152’ to ‘-128’ [-Woverflow]
+  291 |     std::cout << std::string(64, '─') << std::endl;
+      |                                  ^~~

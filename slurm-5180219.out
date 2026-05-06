@@ -1,0 +1,42 @@
+╔════════════════════════════════════════════════════╗
+║  BENCHMARK JOB A: Sizes 50-300 (5 mins)           ║
+╚════════════════════════════════════════════════════╝
+Running...
+
+╔════════════════════════════════════════════════╗
+║   BENCHMARK JOB A: Sizes 50-300              ║
+║   (5 matrix sizes × 4 threads × 5 runs)      ║
+╚════════════════════════════════════════════════╝
+
+Total: 5 sizes × 4 threads = 20 tests
+
+Size 50×50:
+  Size   50 | Threads  1 |     0.00ms |  416.67 GFLOPs
+  Size   50 | Threads  2 |     0.00ms |  299.40 GFLOPs
+  Size   50 | Threads  4 |     0.00ms |  160.77 GFLOPs
+  Size   50 | Threads  8 |     0.00ms |  183.28 GFLOPs
+Size 100×100:
+  Size  100 | Threads  1 |     0.00ms | 4962.78 GFLOPs
+  Size  100 | Threads  2 |     0.00ms | 2085.51 GFLOPs
+  Size  100 | Threads  4 |     0.00ms | 1994.02 GFLOPs
+  Size  100 | Threads  8 |     0.00ms | 1446.13 GFLOPs
+Size 150×150:
+  Size  150 | Threads  1 |     0.00ms | 17002.52 GFLOPs
+  Size  150 | Threads  2 |     0.00ms | 4901.96 GFLOPs
+  Size  150 | Threads  4 |     0.00ms | 7483.37 GFLOPs
+  Size  150 | Threads  8 |     0.00ms | 5144.82 GFLOPs
+Size 200×200:
+  Size  200 | Threads  1 |     0.00ms | 21248.34 GFLOPs
+  Size  200 | Threads  2 |     0.00ms | 10589.01 GFLOPs
+  Size  200 | Threads  4 |     0.00ms | 10709.50 GFLOPs
+  Size  200 | Threads  8 |     0.00ms | 11291.46 GFLOPs
+Size 300×300:
+  Size  300 | Threads  1 |     0.00ms | 70588.24 GFLOPs
+  Size  300 | Threads  2 |     0.00ms | 54380.66 GFLOPs
+  Size  300 | Threads  4 |     0.00ms | 38189.53 GFLOPs
+  Size  300 | Threads  8 |     0.00ms | 46471.60 GFLOPs
+
+✓ Results saved: results_sizes_50_300.csv
+
+-rw-r--r-- 1 gsavary gsavary 491 May  6 16:40 results_sizes_50_300.csv
+✓ Done!

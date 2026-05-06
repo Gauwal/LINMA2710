@@ -1,0 +1,69 @@
+╔═══════════════════════════════════════════════════════════╗
+║  JOB C: Comprehensive Benchmark Sizes 1100-2000          ║
+║  OpenMP: 8 sizes × adaptive threads × 5 runs each        ║
+╚═══════════════════════════════════════════════════════════╝
+
+Starting benchmarks...
+
+╔═══════════════════════════════════════════════════════════╗
+║  COMPREHENSIVE BENCHMARK JOB C: Sizes 1100-2000          ║
+║  OpenMP: Full thread scaling + 5 runs per config         ║
+╚═══════════════════════════════════════════════════════════╝
+
+System: 16 available cores
+Testing: 8 sizes × 5 thread counts × 5 runs = 200 total benchmark runs
+
+Size 1100×1100:
+  Size 1100 | Threads  1 |     0.00ms | 2462534.69 GF
+  Size 1100 | Threads  2 |     0.00ms | 3382465.06 GF
+  Size 1100 | Threads  4 |     0.00ms | 2117740.65 GF
+  Size 1100 | Threads  8 |     0.00ms | 1355397.15 GF
+  Size 1100 | Threads 16 |     0.00ms | 1372164.95 GF
+Size 1200×1200:
+  Size 1200 | Threads  1 |     0.00ms | 7595604.40 GF
+  Size 1200 | Threads  2 |     0.00ms | 3592515.59 GF
+  Size 1200 | Threads  4 |     0.00ms | 2760383.39 GF
+  Size 1200 | Threads  8 |     0.00ms | 1611188.81 GF
+  Size 1200 | Threads 16 |     0.00ms | 1664739.88 GF
+Size 1300×1300:
+  Size 1300 | Threads  1 |     0.00ms | 9808035.71 GF
+  Size 1300 | Threads  2 |     0.00ms | 5313180.17 GF
+  Size 1300 | Threads  4 |     0.00ms | 3708016.88 GF
+  Size 1300 | Threads  8 |     0.00ms | 2679268.29 GF
+  Size 1300 | Threads 16 |     0.00ms | 2245273.38 GF
+Size 1400×1400:
+  Size 1400 | Threads  1 |     0.00ms | 12822429.91 GF
+  Size 1400 | Threads  2 |     0.00ms | 6166292.13 GF
+  Size 1400 | Threads  4 |     0.00ms | 4182926.83 GF
+  Size 1400 | Threads  8 |     0.00ms | 3161290.32 GF
+  Size 1400 | Threads 16 |     0.00ms | 2680996.58 GF
+Size 1500×1500:
+  Size 1500 | Threads  1 |     0.00ms | 16463414.63 GF
+  Size 1500 | Threads  2 |     0.00ms | 7584269.66 GF
+  Size 1500 | Threads  4 |     0.00ms | 5331753.55 GF
+  Size 1500 | Threads  8 |     0.00ms | 3410813.54 GF
+  Size 1500 | Threads 16 |     0.00ms | 3174976.48 GF
+Size 1600×1600:
+  Size 1600 | Threads  1 |     0.00ms | 19185011.71 GF
+  Size 1600 | Threads  2 |     0.00ms | 9002197.80 GF
+  Size 1600 | Threads  4 |     0.00ms | 6574638.84 GF
+  Size 1600 | Threads  8 |     0.00ms | 3745770.46 GF
+  Size 1600 | Threads 16 |     0.00ms | 3693417.49 GF
+Size 1800×1800:
+  Size 1800 | Threads  1 |     0.00ms | 28310679.61 GF
+  Size 1800 | Threads  2 |     0.00ms | 12775465.50 GF
+  Size 1800 | Threads  4 |     0.00ms | 11193857.97 GF
+  Size 1800 | Threads  8 |     0.00ms | 6829039.81 GF
+  Size 1800 | Threads 16 |     0.00ms | 5504483.25 GF
+Size 2000×2000:
+  Size 2000 | Threads  1 |     0.00ms | 33333333.33 GF
+  Size 2000 | Threads  2 |     0.00ms | 18648018.65 GF
+  Size 2000 | Threads  4 |     0.00ms | 12500000.00 GF
+  Size 2000 | Threads  8 |     0.00ms | 9200690.05 GF
+  Size 2000 | Threads 16 |     0.00ms | 7525870.18 GF
+
+✓ Results saved: comprehensive_results_1100_2000.csv
+✓ Completed 40 OpenMP measurements
+
+-rw-r--r-- 1 gsavary gsavary 2.0K May  6 16:44 comprehensive_results_1100_2000.csv
+✓ Job C complete!

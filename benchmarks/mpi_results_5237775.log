@@ -1,0 +1,108 @@
+Using system MPI
+=== Running MPI Benchmark with 4 processes ===
+Running on mb-rom204.cism.ucl.ac.be
+Number of processes: 4
+
+--------------------------------------------------------------------------
+A requested component was not found, or was unable to be opened.  This
+means that this component is either not installed or is unable to be
+used on your system (e.g., sometimes this means that shared libraries
+that the component requires are unable to be found/loaded).  Note that
+PMIx stopped checking at the first component that it did not find.
+
+Host:      mb-rom204.cism.ucl.ac.be
+Framework: psec
+Component: munge
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+A requested component was not found, or was unable to be opened.  This
+means that this component is either not installed or is unable to be
+used on your system (e.g., sometimes this means that shared libraries
+that the component requires are unable to be found/loaded).  Note that
+PMIx stopped checking at the first component that it did not find.
+
+Host:      mb-rom204.cism.ucl.ac.be
+Framework: psec
+Component: munge
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+A requested component was not found, or was unable to be opened.  This
+means that this component is either not installed or is unable to be
+used on your system (e.g., sometimes this means that shared libraries
+that the component requires are unable to be found/loaded).  Note that
+PMIx stopped checking at the first component that it did not find.
+
+Host:      mb-rom204.cism.ucl.ac.be
+Framework: psec
+Component: munge
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+A requested component was not found, or was unable to be opened.  This
+means that this component is either not installed or is unable to be
+used on your system (e.g., sometimes this means that shared libraries
+that the component requires are unable to be found/loaded).  Note that
+PMIx stopped checking at the first component that it did not find.
+
+Host:      mb-rom204.cism.ucl.ac.be
+Framework: psec
+Component: munge
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+A requested component was not found, or was unable to be opened.  This
+means that this component is either not installed or is unable to be
+used on your system (e.g., sometimes this means that shared libraries
+that the component requires are unable to be found/loaded).  Note that
+PMIx stopped checking at the first component that it did not find.
+
+Host:      mb-rom204.cism.ucl.ac.be
+Framework: psec
+Component: munge
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+A requested component was not found, or was unable to be opened.  This
+means that this component is either not installed or is unable to be
+used on your system (e.g., sometimes this means that shared libraries
+that the component requires are unable to be found/loaded).  Note that
+PMIx stopped checking at the first component that it did not find.
+
+Host:      mb-rom204.cism.ucl.ac.be
+Framework: psec
+Component: munge
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+A requested component was not found, or was unable to be opened.  This
+means that this component is either not installed or is unable to be
+used on your system (e.g., sometimes this means that shared libraries
+that the component requires are unable to be found/loaded).  Note that
+PMIx stopped checking at the first component that it did not find.
+
+Host:      mb-rom204.cism.ucl.ac.be
+Framework: psec
+Component: munge
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+A requested component was not found, or was unable to be opened.  This
+means that this component is either not installed or is unable to be
+used on your system (e.g., sometimes this means that shared libraries
+that the component requires are unable to be found/loaded).  Note that
+PMIx stopped checking at the first component that it did not find.
+
+Host:      mb-rom204.cism.ucl.ac.be
+Framework: psec
+Component: munge
+--------------------------------------------------------------------------
+=== Part 3: Distributed Matrix (MPI) Benchmark ===
+Number of processes: 4
+
+=== MultiplyTransposed Benchmark ===
+Size           Total (s)      Compute (s)    Comm (s)       Comm %         GFLOPs         
+------------------------------------------------------------------------------------------
+200            0.0033         0.0033         0.0000         0.0            4.90           
+500            0.0405         0.0405         0.0000         0.0            6.17           
+1000           0.3019         0.3019         0.0000         0.0            6.63           
+2000           2.4770         2.4770         0.0000         0.0            6.46           
+------------------------------------------------------------------------------------------
+
+Results saved to bench_mpi_results.csv
+
+MPI benchmark completed

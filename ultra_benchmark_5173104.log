@@ -1,0 +1,130 @@
+╔════════════════════════════════════════════════════════════════════╗
+║           LINMA2710 ULTRA-COMPREHENSIVE BENCHMARK SUITE           ║
+║              Extensive Data Collection & Analysis                  ║
+╚════════════════════════════════════════════════════════════════════╝
+
+Job ID: 5173104
+Start time: Wed May  6 14:53:25 CEST 2026
+Nodes: 1
+CPUs per task: 16
+Tasks: 4
+
+═══════════════════════════════════════════════════════════════════════
+COMPILATION PHASE
+═══════════════════════════════════════════════════════════════════════
+
+Compiling OpenMP ultra-comprehensive benchmark...
+bench_openmp_ultracomprehensive.cpp:163:34: warning: multi-character character constant [-Wmultichar]
+  163 |     std::cout << std::string(62, '─') << std::endl;
+      |                                  ^~~
+bench_openmp_ultracomprehensive.cpp:199:34: warning: multi-character character constant [-Wmultichar]
+  199 |     std::cout << std::string(64, '─') << std::endl;
+      |                                  ^~~
+bench_openmp_ultracomprehensive.cpp:217:34: warning: multi-character character constant [-Wmultichar]
+  217 |     std::cout << std::string(64, '─') << std::endl;
+      |                                  ^~~
+bench_openmp_ultracomprehensive.cpp:223:34: warning: multi-character character constant [-Wmultichar]
+  223 |     std::cout << std::string(64, '─') << std::endl;
+      |                                  ^~~
+bench_openmp_ultracomprehensive.cpp:255:34: warning: multi-character character constant [-Wmultichar]
+  255 |     std::cout << std::string(64, '─') << std::endl;
+      |                                  ^~~
+bench_openmp_ultracomprehensive.cpp:291:34: warning: multi-character character constant [-Wmultichar]
+  291 |     std::cout << std::string(64, '─') << std::endl;
+      |                                  ^~~
+bench_openmp_ultracomprehensive.cpp: In function ‘int main()’:
+bench_openmp_ultracomprehensive.cpp:163:34: warning: overflow in conversion from ‘int’ to ‘char’ changes value from ‘14849152’ to ‘-128’ [-Woverflow]
+  163 |     std::cout << std::string(62, '─') << std::endl;
+      |                                  ^~~
+bench_openmp_ultracomprehensive.cpp:199:34: warning: overflow in conversion from ‘int’ to ‘char’ changes value from ‘14849152’ to ‘-128’ [-Woverflow]
+  199 |     std::cout << std::string(64, '─') << std::endl;
+      |                                  ^~~
+bench_openmp_ultracomprehensive.cpp:217:34: warning: overflow in conversion from ‘int’ to ‘char’ changes value from ‘14849152’ to ‘-128’ [-Woverflow]
+  217 |     std::cout << std::string(64, '─') << std::endl;
+      |                                  ^~~
+bench_openmp_ultracomprehensive.cpp:223:34: warning: overflow in conversion from ‘int’ to ‘char’ changes value from ‘14849152’ to ‘-128’ [-Woverflow]
+  223 |     std::cout << std::string(64, '─') << std::endl;
+      |                                  ^~~
+bench_openmp_ultracomprehensive.cpp:255:34: warning: overflow in conversion from ‘int’ to ‘char’ changes value from ‘14849152’ to ‘-128’ [-Woverflow]
+  255 |     std::cout << std::string(64, '─') << std::endl;
+      |                                  ^~~
+bench_openmp_ultracomprehensive.cpp:291:34: warning: overflow in conversion from ‘int’ to ‘char’ changes value from ‘14849152’ to ‘-128’ [-Woverflow]
+  291 |     std::cout << std::string(64, '─') << std::endl;
+      |                                  ^~~
+✓ OpenMP compiled
+Compiling MPI ultra-comprehensive benchmark...
+bench_mpi_ultracomprehensive.cpp:139:38: warning: multi-character character constant [-Wmultichar]
+  139 |         std::cout << std::string(85, '─') << std::endl;
+      |                                      ^~~
+bench_mpi_ultracomprehensive.cpp:177:38: warning: multi-character character constant [-Wmultichar]
+  177 |         std::cout << std::string(64, '─') << std::endl;
+      |                                      ^~~
+bench_mpi_ultracomprehensive.cpp:197:38: warning: multi-character character constant [-Wmultichar]
+  197 |         std::cout << std::string(64, '─') << std::endl;
+      |                                      ^~~
+bench_mpi_ultracomprehensive.cpp:202:38: warning: multi-character character constant [-Wmultichar]
+  202 |         std::cout << std::string(64, '─') << std::endl;
+      |                                      ^~~
+bench_mpi_ultracomprehensive.cpp:214:38: warning: multi-character character constant [-Wmultichar]
+  214 |         std::cout << std::string(64, '─') << std::endl;
+      |                                      ^~~
+bench_mpi_ultracomprehensive.cpp: In function ‘void benchmark_mpi_multiply(int, int)’:
+bench_mpi_ultracomprehensive.cpp:29:51: error: no matching function for call to ‘DistributedMatrix::DistributedMatrix(int&, int&, MPI_Comm)’
+   29 |     DistributedMatrix A(size, size, MPI_COMM_WORLD);
+      |                                                   ^
+In file included from bench_mpi_ultracomprehensive.cpp:1:
+/home/ucl/ingi/gsavary/LINMA2710/project/include/distributed_matrix.hpp:29:5: note: candidate: ‘DistributedMatrix::DistributedMatrix(const DistributedMatrix&)’
+   29 |     DistributedMatrix(const DistributedMatrix& other);
+      |     ^~~~~~~~~~~~~~~~~
+/home/ucl/ingi/gsavary/LINMA2710/project/include/distributed_matrix.hpp:29:5: note:   candidate expects 1 argument, 3 provided
+/home/ucl/ingi/gsavary/LINMA2710/project/include/distributed_matrix.hpp:28:5: note: candidate: ‘DistributedMatrix::DistributedMatrix(const Matrix&, int)’
+   28 |     DistributedMatrix(const Matrix& matrix, int numProcesses);
+      |     ^~~~~~~~~~~~~~~~~
+/home/ucl/ingi/gsavary/LINMA2710/project/include/distributed_matrix.hpp:28:5: note:   candidate expects 2 arguments, 3 provided
+bench_mpi_ultracomprehensive.cpp:30:51: error: no matching function for call to ‘DistributedMatrix::DistributedMatrix(int&, int&, MPI_Comm)’
+   30 |     DistributedMatrix B(size, size, MPI_COMM_WORLD);
+      |                                                   ^
+/home/ucl/ingi/gsavary/LINMA2710/project/include/distributed_matrix.hpp:29:5: note: candidate: ‘DistributedMatrix::DistributedMatrix(const DistributedMatrix&)’
+   29 |     DistributedMatrix(const DistributedMatrix& other);
+      |     ^~~~~~~~~~~~~~~~~
+/home/ucl/ingi/gsavary/LINMA2710/project/include/distributed_matrix.hpp:29:5: note:   candidate expects 1 argument, 3 provided
+/home/ucl/ingi/gsavary/LINMA2710/project/include/distributed_matrix.hpp:28:5: note: candidate: ‘DistributedMatrix::DistributedMatrix(const Matrix&, int)’
+   28 |     DistributedMatrix(const Matrix& matrix, int numProcesses);
+      |     ^~~~~~~~~~~~~~~~~
+/home/ucl/ingi/gsavary/LINMA2710/project/include/distributed_matrix.hpp:28:5: note:   candidate expects 2 arguments, 3 provided
+bench_mpi_ultracomprehensive.cpp:33:11: error: ‘class DistributedMatrix’ has no member named ‘fill_root’
+   33 |         A.fill_root(1.0);
+      |           ^~~~~~~~~
+bench_mpi_ultracomprehensive.cpp:34:11: error: ‘class DistributedMatrix’ has no member named ‘fill_root’
+   34 |         B.fill_root(2.0);
+      |           ^~~~~~~~~
+bench_mpi_ultracomprehensive.cpp:36:7: error: ‘class DistributedMatrix’ has no member named ‘broadcast_root’
+   36 |     A.broadcast_root(0);
+      |       ^~~~~~~~~~~~~~
+bench_mpi_ultracomprehensive.cpp:37:7: error: ‘class DistributedMatrix’ has no member named ‘broadcast_root’
+   37 |     B.broadcast_root(0);
+      |       ^~~~~~~~~~~~~~
+bench_mpi_ultracomprehensive.cpp:48:33: error: ‘class DistributedMatrix’ has no member named ‘multiply_transposed’; did you mean ‘multiplyTransposed’?
+   48 |         DistributedMatrix C = A.multiply_transposed(B);
+      |                                 ^~~~~~~~~~~~~~~~~~~
+      |                                 multiplyTransposed
+bench_mpi_ultracomprehensive.cpp:53:11: error: ‘class DistributedMatrix’ has no member named ‘allreduce_sum’
+   53 |         C.allreduce_sum();
+      |           ^~~~~~~~~~~~~
+bench_mpi_ultracomprehensive.cpp: In function ‘int main(int, char**)’:
+bench_mpi_ultracomprehensive.cpp:139:38: warning: overflow in conversion from ‘int’ to ‘char’ changes value from ‘14849152’ to ‘-128’ [-Woverflow]
+  139 |         std::cout << std::string(85, '─') << std::endl;
+      |                                      ^~~
+bench_mpi_ultracomprehensive.cpp:177:38: warning: overflow in conversion from ‘int’ to ‘char’ changes value from ‘14849152’ to ‘-128’ [-Woverflow]
+  177 |         std::cout << std::string(64, '─') << std::endl;
+      |                                      ^~~
+bench_mpi_ultracomprehensive.cpp:197:38: warning: overflow in conversion from ‘int’ to ‘char’ changes value from ‘14849152’ to ‘-128’ [-Woverflow]
+  197 |         std::cout << std::string(64, '─') << std::endl;
+      |                                      ^~~
+bench_mpi_ultracomprehensive.cpp:202:38: warning: overflow in conversion from ‘int’ to ‘char’ changes value from ‘14849152’ to ‘-128’ [-Woverflow]
+  202 |         std::cout << std::string(64, '─') << std::endl;
+      |                                      ^~~
+bench_mpi_ultracomprehensive.cpp:214:38: warning: overflow in conversion from ‘int’ to ‘char’ changes value from ‘14849152’ to ‘-128’ [-Woverflow]
+  214 |         std::cout << std::string(64, '─') << std::endl;
+      |                                      ^~~
+❌ MPI compilation failed!

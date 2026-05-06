@@ -16,26 +16,24 @@ DistributedMatrix::DistributedMatrix(const Matrix& matrix, int numProcs)
       rank(0),                            // Identifies the current node executing this code
       localData(matrix.numRows(), 1)      // Placeholder allocation; will be recreated with proper size shortly
 {
-    // Retrieve the unique ID (rank) of the current MPI process within the global communicator group
+    // Retrieve rank
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
 
-    // Compute integer division to find the minimum number of columns each process will receive.
+    // Compute  minimum number of columns each process will receive.
     int baseCols = globalCols / numProcs;
-    // Compute the leftover columns that couldn't be evenly divided.
+    // Compute  leftover columns
     int remainder = globalCols % numProcs;
     
     // Load Balancing Strategy:
     // Processes (ranks) with an ID less than 'remainder' will absorb exactly 1 extra column.
-    // E.g., if we have 10 cols over 3 processes -> Remainder is 1. Rank 0 gets 4. Rank 1,2 get 3.
     localCols = (rank < remainder) ? (baseCols + 1) : baseCols;
     
     // Determine where this process's column ownership starts in the global mathematical sense.
     if (rank < remainder) {
-        // If we are in the "heavy" group, every previous rank has (baseCols + 1) columns.
+        //every previous rank has (baseCols + 1) columns.
         startCol = rank * (baseCols + 1);
     } else {
-        // If we are in the "normal" group, we must account for 'remainder' ranks having 1 extra column,
-        // plus the remaining ranks before us having 'baseCols' columns.
+        // some have baseCols some have more
         startCol = remainder * (baseCols + 1) + (rank - remainder) * baseCols;
     }
     

@@ -1,0 +1,9 @@
+matrix_size,kernel_type,time_ms,gflops
+128,naive,0.0199178,210.581
+128,optimized,0.0175668,238.763
+256,naive,0.0936378,358.343
+256,optimized,0.070065,478.904
+512,naive,0.637971,420.764
+512,optimized,0.455132,589.796
+1024,naive,4.7606,451.096
+1024,optimized,3.37665,635.981

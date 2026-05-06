@@ -1,0 +1,52 @@
+╔════════════════════════════════════════════════════╗
+║  BENCHMARK JOB B: Sizes 400-1000 (10 mins)        ║
+╚════════════════════════════════════════════════════╝
+Running...
+
+╔════════════════════════════════════════════════╗
+║   BENCHMARK JOB B: Sizes 400-1000            ║
+║   (8 matrix sizes × 4 threads × 5 runs)      ║
+╚════════════════════════════════════════════════╝
+
+Total: 7 sizes × 4 threads = 28 tests
+
+Size 400×400:
+  Size  400 | Threads  1 |     0.00ms | 197226.50 GFLOPs
+  Size  400 | Threads  2 |     0.00ms | 170894.53 GFLOPs
+  Size  400 | Threads  4 |     0.00ms | 71150.64 GFLOPs
+  Size  400 | Threads  8 |     0.00ms | 102976.67 GFLOPs
+Size 500×500:
+  Size  500 | Threads  1 |     0.00ms | 337381.92 GFLOPs
+  Size  500 | Threads  2 |     0.00ms | 558035.71 GFLOPs
+  Size  500 | Threads  4 |     0.00ms | 301568.15 GFLOPs
+  Size  500 | Threads  8 |     0.00ms | 202265.37 GFLOPs
+Size 600×600:
+  Size  600 | Threads  1 |     0.00ms | 1018867.92 GFLOPs
+  Size  600 | Threads  2 |     0.00ms | 632503.66 GFLOPs
+  Size  600 | Threads  4 |     0.00ms | 213333.33 GFLOPs
+  Size  600 | Threads  8 |     0.00ms | 368286.45 GFLOPs
+Size 700×700:
+  Size  700 | Threads  1 |     0.00ms | 1595348.84 GFLOPs
+  Size  700 | Threads  2 |     0.00ms | 363732.77 GFLOPs
+  Size  700 | Threads  4 |     0.00ms | 379005.52 GFLOPs
+  Size  700 | Threads  8 |     0.00ms | 512705.53 GFLOPs
+Size 800×800:
+  Size  800 | Threads  1 |     0.00ms | 2386946.39 GFLOPs
+  Size  800 | Threads  2 |     0.00ms | 1055670.10 GFLOPs
+  Size  800 | Threads  4 |     0.00ms | 470588.24 GFLOPs
+  Size  800 | Threads  8 |     0.00ms | 834555.83 GFLOPs
+Size 900×900:
+  Size  900 | Threads  1 |     0.00ms | 3463182.90 GFLOPs
+  Size  900 | Threads  2 |     0.00ms | 1756626.51 GFLOPs
+  Size  900 | Threads  4 |     0.00ms | 1196062.35 GFLOPs
+  Size  900 | Threads  8 |     0.00ms | 1205955.33 GFLOPs
+Size 1000×1000:
+  Size 1000 | Threads  1 |     0.00ms | 4987531.17 GFLOPs
+  Size 1000 | Threads  2 |     0.00ms | 2635046.11 GFLOPs
+  Size 1000 | Threads  4 |     0.00ms | 1906577.69 GFLOPs
+  Size 1000 | Threads  8 |     0.00ms | 1615508.89 GFLOPs
+
+✓ Results saved: results_sizes_400_1000.csv
+
+-rw-r--r-- 1 gsavary gsavary 716 May  6 16:40 results_sizes_400_1000.csv
+✓ Done!

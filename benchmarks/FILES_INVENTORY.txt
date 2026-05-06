@@ -1,0 +1,223 @@
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                   LINMA2710 BENCHMARKING - FILES INVENTORY                   ║
+║                         Everything You Have Ready                            ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+QUICK START FILE (Read This First!)
+═══════════════════════════════════════════════════════════════════════════════
+✓ START_HERE.txt                      - Quick reference guide
+
+DOCUMENTATION (7 comprehensive guides)
+═══════════════════════════════════════════════════════════════════════════════
+✓ README.md                           - Complete benchmarking guide (8.7K)
+✓ BENCHMARK_COMPLETE.md               - Setup and execution guide (9.0K)
+✓ PROFILING_GUIDE.md                  - Advanced profiling instructions (4.0K)
+✓ PRESENTATION_CHEATSHEET.md          - Exam day preparation guide (7.9K)
+✓ FILES_INVENTORY.txt                 - This file (you are here!)
+
+BENCHMARK PROGRAMS (3 parallel benchmarks)
+═══════════════════════════════════════════════════════════════════════════════
+✓ bench_openmp.cpp (4.2K)             - OpenMP parallelization benchmark
+✓ bench_mpi.cpp (4.0K)                - Distributed MPI benchmark
+✓ bench_opencl.cpp (10K)              - GPU computing benchmark
+
+COMPILED BINARIES (Ready to run)
+═══════════════════════════════════════════════════════════════════════════════
+✓ bench_openmp (39K)                  - Compiled and ready to execute
+
+BUILD CONFIGURATION
+═══════════════════════════════════════════════════════════════════════════════
+✓ Makefile (1.1K)                     - Build recipes for all benchmarks
+
+EXECUTION SCRIPTS
+═══════════════════════════════════════════════════════════════════════════════
+✓ run_all_benchmarks.sh               - Master runner (executes everything)
+✓ submit_benchmarks.sh                - Alternative runner script
+✓ submit_manneback.slurm              - SLURM job script (manneback cluster)
+✓ submit_lyra.slurm                   - SLURM job script (lyra cluster)
+
+VISUALIZATION & ANALYSIS TOOLS
+═══════════════════════════════════════════════════════════════════════════════
+✓ plot_results.py (11K)               - Generates 5 presentation figures
+✓ generate_profiling_setup.py (6.1K) - Advanced profiling setup generator
+
+GENERATED OUTPUT (when you run benchmarks)
+═══════════════════════════════════════════════════════════════════════════════
+Generated CSV files (data):
+  → bench_openmp_results.csv           - OpenMP timing data
+  → bench_mpi_results.csv              - MPI communication data
+  → bench_opencl_results.csv           - OpenCL GPU data
+
+Generated PNG figures (for slides):
+  → figures/01_openmp_speedup.png      - Speedup vs threads analysis
+  → figures/02_mpi_communication.png   - Communication breakdown
+  → figures/03_opencl_kernels.png      - GPU kernel comparison
+  → figures/04_gflops_comparison.png   - Cross-paradigm performance
+  → figures/05_summary_table.png       - Key metrics summary
+
+═══════════════════════════════════════════════════════════════════════════════
+TOTAL: 16 files (116 KB) + 8 generated output files
+═══════════════════════════════════════════════════════════════════════════════
+
+HOW TO USE THIS
+───────────────────────────────────────────────────────────────────────────────
+
+1. TO GET STARTED:
+   • Read: START_HERE.txt (2 min)
+   • Then: Follow 5-step quick start
+
+2. TO RUN BENCHMARKS:
+   • Interactive: bash run_all_benchmarks.sh
+   • Batch job: sbatch submit_manneback.slurm
+
+3. TO PREPARE PRESENTATION:
+   • Copy 5 PNG files from figures/ to your slides
+   • Memorize key numbers (see PRESENTATION_CHEATSHEET.md)
+   • Practice 5-minute presentation
+
+4. FOR DETAILED HELP:
+   • Setup issues: README.md
+   • Q&A preparation: PRESENTATION_CHEATSHEET.md
+   • Advanced profiling: PROFILING_GUIDE.md
+
+═══════════════════════════════════════════════════════════════════════════════
+CLUSTER SETUP (Quick Reminder)
+───────────────────────────────────────────────────────────────────────────────
+
+ssh manneback
+salloc --partition=gpu --gres=gpu:1 --time=2:00:00 --mem-per-cpu=2000
+module load CUDA Python
+cd ~/LINMA2710/benchmarks
+bash run_all_benchmarks.sh
+
+═══════════════════════════════════════════════════════════════════════════════
+WHAT EACH FILE DOES
+───────────────────────────────────────────────────────────────────────────────
+
+START_HERE.txt
+  → Quick reference with 4-line setup, troubleshooting, key numbers
+
+README.md
+  → Full guide: build, run, understand results, advanced profiling
+  → Read if you want deep details about each benchmark
+
+BENCHMARK_COMPLETE.md
+  → Setup timeline and execution instructions
+  → What each figure shows for your presentation
+
+PROFILING_GUIDE.md
+  → How to profile with perf, nvprof, MPI tracing
+  → Power consumption measurement instructions
+  → For advanced analysis beyond basic benchmarks
+
+PRESENTATION_CHEATSHEET.md
+  → 5-minute presentation breakdown with timing
+  → Q&A answer templates (what to say for common questions)
+  → Memorization checklist
+  → Emergency fallback answers
+
+bench_*.cpp
+  → Source code for each benchmark
+  → You can modify if needed for custom testing
+
+Makefile
+  → Build configuration: make all, make clean, make run_openmp, etc.
+
+plot_results.py
+  → Automatic figure generation from CSV files
+  → Run it alone: python3 plot_results.py
+
+run_all_benchmarks.sh
+  → Master script that:
+    1. Builds all benchmarks
+    2. Runs all three benchmarks
+    3. Generates plots automatically
+    4. Creates figures/ directory with 5 PNG files
+
+═══════════════════════════════════════════════════════════════════════════════
+CLUSTER SCRIPTS
+───────────────────────────────────────────────────────────────────────────────
+
+run_all_benchmarks.sh
+  → Interactive: bash run_all_benchmarks.sh
+  → Takes ~3-5 minutes on cluster
+
+submit_manneback.slurm / submit_lyra.slurm
+  → Batch mode: sbatch submit_manneback.slurm
+  → Submits to job queue, runs when resources available
+  → Better for long benchmarks or if node is busy
+
+═══════════════════════════════════════════════════════════════════════════════
+YOUR PRESENTATION NEEDS (5 PNG files)
+───────────────────────────────────────────────────────────────────────────────
+
+You'll insert these 5 figures into your presentation slides:
+
+01_openmp_speedup.png
+  ├─ Speedup vs number of threads
+  ├─ Shows parallelization efficiency
+  └─ Talk point: "X× speedup with Y threads"
+
+02_mpi_communication.png
+  ├─ Computation vs communication time breakdown
+  ├─ Communication percentage vs matrix size
+  └─ Talk point: "Z% communication overhead"
+
+03_opencl_kernels.png
+  ├─ Naive vs Optimized kernel performance
+  ├─ Speedup from optimization
+  └─ Talk point: "W× speedup from local memory tiling"
+
+04_gflops_comparison.png
+  ├─ All three paradigms on same chart
+  ├─ GFLOPs comparison
+  └─ Talk point: "Each paradigm excels at different scales"
+
+05_summary_table.png
+  ├─ One-page summary of key metrics
+  ├─ Best performance from each paradigm
+  └─ Quick reference during presentation
+
+═══════════════════════════════════════════════════════════════════════════════
+KEY NUMBERS TO MEMORIZE (From your benchmark output)
+───────────────────────────────────────────────────────────────────────────────
+
+OpenMP:
+  ☐ Speedup at 8 threads: _____x
+  ☐ Peak GFLOPs: _____ GFLOP/s
+
+MPI (4 processes):
+  ☐ Communication overhead: _____%
+
+OpenCL (Optimized kernel):
+  ☐ Speedup vs naive: _____x
+  ☐ GPU device name: _______
+
+═══════════════════════════════════════════════════════════════════════════════
+TIMELINE
+───────────────────────────────────────────────────────────────────────────────
+
+Today: Run benchmarks (5 min on cluster)
+       ↓
+Tomorrow: Download figures + memorize key numbers
+         ↓
+Days 2-3: Create presentation slides with figures
+         ↓
+Days 3-4: Practice 5-minute presentation
+         ↓
+Day 5: Memorize Q&A answers
+      ↓
+May 11, 6pm: Submit slides to Moodle
+            ↓
+May 12: Oral exam (5 min presentation + 5+ min Q&A)
+
+═══════════════════════════════════════════════════════════════════════════════
+
+YOU'RE READY TO START! 🚀
+
+Next step: Read START_HERE.txt (2 minutes)
+Then: ssh manneback and follow the 5-step setup
+
+Good luck with your presentation!
+
+═══════════════════════════════════════════════════════════════════════════════

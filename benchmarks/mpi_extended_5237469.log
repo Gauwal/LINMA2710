@@ -1,0 +1,8 @@
+=== MPI Benchmark with 2 processes ===
+/var/spool/slurmd/job5237469/slurm_script: line 13: mpirun: command not found
+
+=== MPI Benchmark with 4 processes ===
+/var/spool/slurmd/job5237469/slurm_script: line 17: mpirun: command not found
+
+=== MPI Benchmark with 8 processes ===
+/var/spool/slurmd/job5237469/slurm_script: line 21: mpirun: command not found

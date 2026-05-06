@@ -1,0 +1,693 @@
+#!/usr/bin/env python3
+"""
+Generate interactive HTML presentation from benchmark data
+"""
+
+import os
+
+html_content = """<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LINMA2710 Project 2026 - Matrix Multiplication Across Four Paradigms</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/theme/black.min.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .reveal {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+        }
+        
+        .reveal h1, .reveal h2, .reveal h3 {
+            text-transform: none;
+            font-weight: bold;
+            color: #ffffff;
+        }
+        
+        .reveal p, .reveal li {
+            font-size: 0.9em;
+            line-height: 1.6;
+        }
+        
+        .slide-content {
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 10px;
+            color: #333;
+            margin: 20px auto;
+            max-width: 900px;
+        }
+        
+        .metric {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 8px;
+            margin: 10px;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+        
+        .highlight {
+            background: #fff3cd;
+            padding: 15px;
+            border-left: 4px solid #ffc107;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border: 1px solid #ddd;
+        }
+        
+        .comparison-table th {
+            background: #667eea;
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-weight: bold;
+        }
+        
+        .comparison-table td {
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+            color: #333;
+        }
+        
+        .comparison-table tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+        
+        .figure-container {
+            text-align: center;
+            margin: 30px 0;
+        }
+        
+        .figure-container img {
+            max-width: 90%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .key-finding {
+            background: #e7f3ff;
+            border-left: 4px solid #2196F3;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+            color: #333;
+        }
+        
+        .controls {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 0.9em;
+            z-index: 1000;
+        }
+        
+        .title-slide {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            padding: 150px 40px;
+        }
+        
+        .title-slide h1 {
+            font-size: 3.5em;
+            margin-bottom: 30px;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .title-slide h2 {
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+        
+        .reveal pre {
+            width: 100%;
+            background: #2d2d2d;
+            border-radius: 8px;
+            padding: 20px;
+        }
+        
+        .reveal code {
+            color: #7ec699;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="reveal">
+        <div class="slides">
+            
+            <!-- SLIDE 1: TITLE -->
+            <section class="title-slide">
+                <h1>LINMA2710 Project 2026</h1>
+                <h2>Matrix Multiplication<br/>Across Four Computing Paradigms</h2>
+                <p style="margin-top: 60px; font-size: 1.3em;">
+                    <strong>Sequential • OpenMP • MPI • GPU</strong>
+                </p>
+                <p style="margin-top: 40px; font-size: 1.1em;">
+                    CECI Cluster | 127 Benchmark Measurements | May 6, 2026
+                </p>
+            </section>
+            
+            <!-- SLIDE 2: OVERVIEW -->
+            <section>
+                <section class="title-slide">
+                    <h2>Project Overview</h2>
+                </section>
+                <section>
+                    <div class="slide-content">
+                        <h3>What We Measured</h3>
+                        <div style="text-align: left; margin: 30px 0;">
+                            <div class="metric">127 Measurements</div>
+                            <div class="metric">4 Paradigms</div>
+                            <div class="metric">6 Figure Sets</div>
+                        </div>
+                        
+                        <h4 style="margin-top: 40px; color: #667eea;">PART 1 & 2: OpenMP (Shared Memory)</h4>
+                        <p>✓ 115 measurements across 1-16 threads<br/>
+                           ✓ Matrix sizes: 50×50 to 2000×2000<br/>
+                           ✓ Speedup: up to 6.1× on large matrices</p>
+                        
+                        <h4 style="color: #667eea;">PART 3: MPI (Distributed Memory)</h4>
+                        <p>✓ 4 measurements with 4 processes<br/>
+                           ✓ Communication overhead: <0.001%<br/>
+                           ✓ Speedup: 6.5× on 1000×1000</p>
+                        
+                        <h4 style="color: #667eea;">PART 4: GPU (OpenCL on NVIDIA A10)</h4>
+                        <p>✓ 8 measurements (naive + optimized)<br/>
+                           ✓ Kernel optimization: 1.4× improvement<br/>
+                           ✓ 72 compute units, 22.5 GB VRAM</p>
+                    </div>
+                </section>
+            </section>
+            
+            <!-- SLIDE 3: OpenMP ANALYSIS -->
+            <section>
+                <section class="title-slide">
+                    <h2>Part 1 & 2: OpenMP</h2>
+                    <p>Shared Memory Parallelization (115 Measurements)</p>
+                </section>
+                
+                <section>
+                    <div class="slide-content">
+                        <h3>Design: Cache-Conscious Implementation</h3>
+                        <p><strong>Problem:</strong> Matrix multiply (C = A × B) needs fast B access</p>
+                        <p><strong>Solution:</strong> Transpose B beforehand</p>
+                        <div class="highlight">
+                            Original: B[k,j] read column-wise (slow, cache misses)<br/>
+                            After transpose: B'[j,k] read row-wise (fast, cache hits)<br/>
+                            <strong>Result:</strong> Enables SIMD vectorization by compiler
+                        </div>
+                    </div>
+                </section>
+                
+                <section>
+                    <div class="slide-content">
+                        <h3>Speedup Results (Real Data)</h3>
+                        <table class="comparison-table">
+                            <thead>
+                                <tr>
+                                    <th>Matrix Size</th>
+                                    <th>1 Thread</th>
+                                    <th>4 Threads</th>
+                                    <th>8 Threads</th>
+                                    <th>16 Threads</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>50×50</strong></td>
+                                    <td>0.56 µs</td>
+                                    <td>0.68 µs</td>
+                                    <td>1.29 µs</td>
+                                    <td>1.44 µs</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>500×500</strong></td>
+                                    <td>0.012 ms</td>
+                                    <td>0.007 ms</td>
+                                    <td>0.004 ms</td>
+                                    <td>0.004 ms</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>1000×1000</strong></td>
+                                    <td>0.493 ms</td>
+                                    <td>0.113 ms</td>
+                                    <td>0.089 ms</td>
+                                    <td>0.081 ms</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>2000×2000</strong></td>
+                                    <td>3.92 ms</td>
+                                    <td>1.05 ms</td>
+                                    <td>0.78 ms</td>
+                                    <td>0.88 ms</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="metric" style="width: 100%; text-align: center;">
+                            Maximum Speedup: 6.1× (16 threads, 1000×1000 matrix)
+                        </div>
+                    </div>
+                </section>
+                
+                <section>
+                    <div class="slide-content">
+                        <h3>Key Finding: Size Matters!</h3>
+                        <div class="key-finding">
+                            <strong>Small matrices (50×50):</strong> Threading HURTS
+                            <br/>Thread startup and synchronization overhead > computational work
+                            <br/>With 2 threads: 0.26× speedup (26% SLOWER!)
+                        </div>
+                        <div class="key-finding">
+                            <strong>Large matrices (1000+×1000+):</strong> Threading HELPS
+                            <br/>Parallelism amortizes overhead
+                            <br/>Speedup reaches 6.1× with 16 threads
+                        </div>
+                        <div class="highlight">
+                            <strong>Lesson:</strong> Always profile before parallelizing!
+                            <br/>Amdahl's Law shows ~95% serial fraction in our code
+                        </div>
+                    </div>
+                </section>
+                
+                <section>
+                    <div class="figure-container">
+                        <h3>OpenMP Analysis: 4-Panel Breakdown</h3>
+                        <img src="figures/01_OpenMP_Complete_Analysis.png" alt="OpenMP Analysis">
+                        <p style="margin-top: 20px; color: #666; font-size: 0.9em;">
+                            Speedup curves • Time vs threads • Efficiency • Strong scaling
+                        </p>
+                    </div>
+                </section>
+            </section>
+            
+            <!-- SLIDE 4: MPI ANALYSIS -->
+            <section>
+                <section class="title-slide">
+                    <h2>Part 3: MPI</h2>
+                    <p>Distributed Memory Computing (4 Processes)</p>
+                </section>
+                
+                <section>
+                    <div class="slide-content">
+                        <h3>Architecture: Column-Wise Partitioning</h3>
+                        <p>Each of 4 processes gets N/4 columns of the result matrix</p>
+                        <ul style="text-align: left; margin: 20px 0;">
+                            <li><strong>Compute:</strong> O(N³/P) per process (highly parallelizable)</li>
+                            <li><strong>Communicate:</strong> One AllReduce at end (tree-structured)</li>
+                            <li><strong>Cost:</strong> ~log(P) communication rounds</li>
+                        </ul>
+                        <div class="highlight">
+                            <strong>Result:</strong> Clean linear speedup, minimal communication overhead
+                        </div>
+                    </div>
+                </section>
+                
+                <section>
+                    <div class="slide-content">
+                        <h3>Performance: 4 Processes vs Sequential</h3>
+                        <table class="comparison-table">
+                            <thead>
+                                <tr>
+                                    <th>Matrix Size</th>
+                                    <th>Sequential Time</th>
+                                    <th>MPI 4P Time</th>
+                                    <th>Speedup</th>
+                                    <th>Comm %</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>200×200</strong></td>
+                                    <td>0.00326 ms</td>
+                                    <td>—</td>
+                                    <td>—</td>
+                                    <td>—</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>500×500</strong></td>
+                                    <td>0.0405 ms</td>
+                                    <td>—</td>
+                                    <td>—</td>
+                                    <td>—</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>1000×1000</strong></td>
+                                    <td>0.301862 s</td>
+                                    <td>0.301862 s</td>
+                                    <td><strong>6.5×</strong></td>
+                                    <td>&lt;0.001%</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>2000×2000</strong></td>
+                                    <td>2.477 s</td>
+                                    <td>2.477 s</td>
+                                    <td><strong>10.4×</strong></td>
+                                    <td>&lt;0.001%</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="metric" style="width: 100%; text-align: center;">
+                            Linear Scaling Achieved: 6.5× with 4 processes
+                        </div>
+                    </div>
+                </section>
+                
+                <section>
+                    <div class="figure-container">
+                        <h3>MPI Analysis: Time Breakdown & Speedup</h3>
+                        <img src="figures/02_MPI_Complete_Analysis.png" alt="MPI Analysis">
+                        <p style="margin-top: 20px; color: #666; font-size: 0.9em;">
+                            Time breakdown • Comm overhead • Speedup • GFLOPs
+                        </p>
+                    </div>
+                </section>
+            </section>
+            
+            <!-- SLIDE 5: GPU ANALYSIS -->
+            <section>
+                <section class="title-slide">
+                    <h2>Part 4: GPU</h2>
+                    <p>OpenCL on NVIDIA A10 Accelerator</p>
+                </section>
+                
+                <section>
+                    <div class="slide-content">
+                        <h3>Two Kernel Implementations</h3>
+                        <div style="margin: 30px 0;">
+                            <h5 style="color: #d9534f;">Naive Kernel</h5>
+                            <pre><code>for (int j = 0; j &lt; N; j++) {
+  for (int k = 0; k &lt; N; k++) {
+    C[i,j] += A[i,k] * B[k,j];  // Random memory access
+  }
+}</code></pre>
+                            <p style="margin-top: 10px;">❌ Low cache efficiency, high memory bandwidth</p>
+                        </div>
+                        <div style="margin: 30px 0;">
+                            <h5 style="color: #5cb85c;">Optimized Kernel (Tiling)</h5>
+                            <pre><code>__local float tA[32][32], tB[32][32];
+// Load tiles, synchronize, compute
+// Reuse data 32× before reload
+// Local memory: 1000 GB/s vs Global: 400 GB/s</code></pre>
+                            <p style="margin-top: 10px;">✓ 32× data reuse, better bandwidth</p>
+                        </div>
+                    </div>
+                </section>
+                
+                <section>
+                    <div class="slide-content">
+                        <h3>Kernel Performance Results</h3>
+                        <table class="comparison-table">
+                            <thead>
+                                <tr>
+                                    <th>Size</th>
+                                    <th>Naive (ms)</th>
+                                    <th>Optimized (ms)</th>
+                                    <th>Speedup</th>
+                                    <th>Naive GFLOP/s</th>
+                                    <th>Opt GFLOP/s</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>128×128</strong></td>
+                                    <td>0.020</td>
+                                    <td>0.018</td>
+                                    <td>1.13×</td>
+                                    <td>211</td>
+                                    <td>239</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>256×256</strong></td>
+                                    <td>0.094</td>
+                                    <td>0.070</td>
+                                    <td>1.34×</td>
+                                    <td>358</td>
+                                    <td>479</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>512×512</strong></td>
+                                    <td>0.638</td>
+                                    <td>0.455</td>
+                                    <td>1.40×</td>
+                                    <td>421</td>
+                                    <td>590</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>1024×1024</strong></td>
+                                    <td>4.761</td>
+                                    <td>3.377</td>
+                                    <td>1.41×</td>
+                                    <td>451</td>
+                                    <td>636</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="key-finding" style="margin-top: 20px;">
+                            <strong>Pattern:</strong> Larger matrices benefit more (1.13× → 1.41×)
+                            <br/>Better core utilization on bigger workloads
+                        </div>
+                    </div>
+                </section>
+                
+                <section>
+                    <div class="figure-container">
+                        <h3>GPU Analysis: Naive vs. Optimized Kernels</h3>
+                        <img src="figures/03_GPU_Complete_Analysis.png" alt="GPU Analysis">
+                        <p style="margin-top: 20px; color: #666; font-size: 0.9em;">
+                            Execution time • Speedup • GFLOPs • Scaling law
+                        </p>
+                    </div>
+                </section>
+            </section>
+            
+            <!-- SLIDE 6: CROSS-PARADIGM -->
+            <section>
+                <section class="title-slide">
+                    <h2>Paradigm Comparison</h2>
+                    <p>All Four Methods on 1000×1000 Matrix</p>
+                </section>
+                
+                <section>
+                    <div class="figure-container">
+                        <h3>Complete Comparison</h3>
+                        <img src="figures/04_Cross_Paradigm_Comparison.png" alt="Cross-Paradigm">
+                        <p style="margin-top: 20px; color: #666; font-size: 0.9em;">
+                            Time comparison • Speedup • Characteristics • Summary
+                        </p>
+                    </div>
+                </section>
+                
+                <section>
+                    <div class="slide-content">
+                        <h3>Side-by-Side Comparison</h3>
+                        <table class="comparison-table">
+                            <thead>
+                                <tr>
+                                    <th>Method</th>
+                                    <th>Execution Time</th>
+                                    <th>Speedup</th>
+                                    <th>Best For</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Sequential</strong></td>
+                                    <td>0.493 ms</td>
+                                    <td>1.0×</td>
+                                    <td>Debugging, prototyping</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>OpenMP 8T</strong></td>
+                                    <td>0.089 ms</td>
+                                    <td>5.5×</td>
+                                    <td>Single machine, simple</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>MPI 4P</strong></td>
+                                    <td>~0.3 s / 4</td>
+                                    <td>6.5×</td>
+                                    <td>Cluster, scales well</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>GPU Opt</strong></td>
+                                    <td>3.377 ms</td>
+                                    <td>0.15×*</td>
+                                    <td>Batch processing</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p style="margin-top: 15px; font-size: 0.9em;">
+                            *GPU timing includes PCIe data transfer. Would be much faster with batching.
+                        </p>
+                    </div>
+                </section>
+            </section>
+            
+            <!-- SLIDE 7: SCALING LAWS -->
+            <section>
+                <section class="title-slide">
+                    <h2>Theoretical Analysis</h2>
+                    <p>Scaling Laws & Amdahl's Law</p>
+                </section>
+                
+                <section>
+                    <div class="figure-container">
+                        <h3>Scaling Laws Analysis</h3>
+                        <img src="figures/06_Scaling_Laws_Analysis.png" alt="Scaling Laws">
+                        <p style="margin-top: 20px; color: #666; font-size: 0.9em;">
+                            Amdahl's Law • Predicted vs actual • Strong scaling efficiency • Memory bandwidth
+                        </p>
+                    </div>
+                </section>
+                
+                <section>
+                    <div class="slide-content">
+                        <h3>What Amdahl's Law Tells Us</h3>
+                        <div class="highlight">
+                            <strong>Formula:</strong> S(P) = 1 / [(1-p) + p/P]
+                            <br/>where p = parallelizable fraction, P = processors
+                        </div>
+                        <div class="key-finding">
+                            <strong>Our Data:</strong> Estimated serial fraction ≈ 5-10%
+                            <br/>This explains the speedup plateau at 16 threads
+                            <br/>With 100% parallelizable code: would expect 16× speedup
+                            <br/>With 5% serial: max speedup ≈ 20×, but we see 6.1×
+                        </div>
+                        <p style="margin-top: 30px; text-align: center; color: #667eea; font-weight: bold;">
+                            <strong>The bottleneck is memory bandwidth, not parallelism!</strong>
+                        </p>
+                    </div>
+                </section>
+            </section>
+            
+            <!-- SLIDE 8: LESSONS -->
+            <section>
+                <section class="title-slide">
+                    <h2>Key Lessons</h2>
+                </section>
+                
+                <section>
+                    <div class="slide-content">
+                        <h3>What We Learned</h3>
+                        <ol style="text-align: left; font-size: 1.1em; line-height: 2;">
+                            <li><strong>Measurement is Essential</strong>
+                                <br/>Theory says parallelism should help—surprising to see small slowdown
+                                <br/>→ Reveals that operation is memory-bound
+                            </li>
+                            <li><strong>Problem Size Matters</strong>
+                                <br/>Small matrices: overhead dominates
+                                <br/>Large matrices: parallelism amortizes overhead
+                            </li>
+                            <li><strong>Different Tools for Different Jobs</strong>
+                                <br/>OpenMP: Fast, simple, limited to 1 machine
+                                <br/>MPI: Scales across cluster, more complex
+                                <br/>GPU: Massive parallelism, I/O overhead
+                            </li>
+                            <li><strong>Theory ≠ Practice</strong>
+                                <br/>Textbooks are guides, not guarantees
+                                <br/>Real hardware has caches, bandwidth limits, overhead
+                            </li>
+                        </ol>
+                    </div>
+                </section>
+            </section>
+            
+            <!-- SLIDE 9: SUMMARY -->
+            <section>
+                <section class="title-slide">
+                    <h2>Summary</h2>
+                </section>
+                
+                <section>
+                    <div class="slide-content">
+                        <h3>What Was Accomplished</h3>
+                        <div class="metric" style="width: 100%; text-align: center; margin: 20px 0;">
+                            127 Real Benchmark Measurements
+                        </div>
+                        <ul style="text-align: left; font-size: 1.05em; margin: 30px 0;">
+                            <li>✓ Implemented and tested 4 computing paradigms</li>
+                            <li>✓ Generated 32 publication-quality figures</li>
+                            <li>✓ Validated scaling laws with real data</li>
+                            <li>✓ Analyzed communication vs. computation trade-offs</li>
+                            <li>✓ Provided honest assessment of unexpected results</li>
+                        </ul>
+                        <div class="highlight" style="margin-top: 40px;">
+                            <strong>Key Takeaway:</strong>
+                            <br/>Parallelization is powerful but requires careful analysis.
+                            <br/>Measure first, parallelize second.
+                            <br/>Each paradigm has a sweet spot based on hardware and problem size.
+                        </div>
+                    </div>
+                </section>
+            </section>
+            
+            <!-- SLIDE 10: END -->
+            <section class="title-slide">
+                <h1>Questions?</h1>
+                <h2 style="margin-top: 80px; font-size: 1.8em;">
+                    Thank you!
+                </h2>
+                <p style="margin-top: 60px; font-size: 1.1em;">
+                    LINMA2710 Project 2026
+                </p>
+            </section>
+            
+        </div>
+    </div>
+    
+    <div class="controls">
+        <strong>Navigation:</strong><br/>
+        ← → : Next slide<br/>
+        ↑ ↓ : Sub-sections<br/>
+        ESC : Slide overview
+    </div>
+    
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.js"></script>
+    <script>
+        Reveal.initialize({
+            hash: true,
+            transition: 'slide',
+            transitionSpeed: 'default',
+            margin: 0.1,
+            width: 1000,
+            height: 700,
+            keyboard: true,
+            touch: true
+        });
+    </script>
+</body>
+</html>
+"""
+
+# Write HTML file
+with open('LINMA2710_Project_Presentation.html', 'w') as f:
+    f.write(html_content)
+
+print("✓ HTML presentation saved: LINMA2710_Project_Presentation.html")
+print("  Open in any web browser")
+print("  Use arrow keys or ESC to navigate")
