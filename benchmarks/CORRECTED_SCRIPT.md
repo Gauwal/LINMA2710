@@ -39,7 +39,7 @@ Matrix  | 1T      | 4T      | 8T      | 16T     | Speedup @ 16T
 2000    | 8706 ms | 2179 ms | 1090 ms | 554 ms  | 15.70×
 ```
 
-**The scaling pattern:** 14-15.7× speedup on 16 cores. Why not 16×? Memory bandwidth becomes the bottleneck starting around 8 cores. Each additional thread has less independent memory bandwidth. The efficiency curve shows: single-threaded baseline, then ~3.5× per core up to 4 cores, then diminishing returns. This is the *memory bandwidth wall* — once all threads saturate the L3 cache and memory bus, additional parallelism has minimal benefit. Classic scaled speedup, not strong scaling."
+**The scaling pattern:** 14-15.7× speedup on 16 cores. Why not 16×? Here's the physics. Intel's L3 cache and memory bus sustain ~100 GB/s total bandwidth. A single core uses ~25 GB/s, so 4 cores each get full bandwidth — that's why we get perfect 4× scaling. But at 8 cores, each core gets only 12.5 GB/s; at 16 cores, only 6.25 GB/s. Matrix multiply needs 2 loads per operation, so at 6.25 GB/s, each core performs only ~3 multiplies per second per byte loaded — it's compute-starved. Yet we still get 14.66× total speedup: those final 8 cores add 6.96× more speedup, each at ~45% efficiency. The key distinction: we measure **strong scaling** — fixed problem size (2000×2000), varying cores. This hits the memory wall around 8 cores. **Weak scaling** would keep work-per-core constant and grow the matrix size. Since matrix multiply is O(N³) computation per O(N²) data, weak scaling could reach 16× or higher — each additional core still has independent work. But we're bounded by strong scaling here: once the shared memory bus saturates, you've hit the wall."
 
 ---
 
@@ -57,7 +57,7 @@ Matrix  | 1T      | 4T      | 8T      | 16T     | Speedup @ 16T
 
 ## **[SLIDE 8 — Part 3: MPI Communication Profile]** *(30 seconds)*
 
-"In `multiplyTransposed`, the work splits into **local multiply** — O(m × n × k/p) — and **MPI_Allreduce** — O(m² × log p). For a 1000×1000 matrix on 4 processes: computation is 302 milliseconds, communication is 0.36 microseconds. That's 0.0000012% overhead — communication is truly negligible. As p increases, computation shrinks as 1/p while communication cost grows as log p. So for large matrices, computation dominates and we get near-linear speedup. For small matrices, the Allreduce dominates. The `gather()` method uses `MPI_Allgatherv` rather than `MPI_Allgather` specifically to handle the variable column counts from the remainder distribution — crucial for correct load balancing."
+"In `multiplyTransposed`, the work splits into **local multiply** — O(m × n × k/p) — and **MPI_Allreduce** — O(m² × log p). For a 1000×1000 matrix on 4 processes: computation is 302 milliseconds, communication is 0.36 microseconds — that's 0.0000012% overhead. Why so small? Because matrix multiply is O(N³) computation on O(N²) data. Allreduce reduces 1 million floats across 4 ranks — a tree with log₄ = 2 hops, moving 8 MB per hop. Even at 1 Gbps, that's 64 milliseconds total. But computation is 302 milliseconds — communication shrinks to 20% overhead, often less. The crucial property: as N grows, computation grows as N³ but Allreduce grows as N² × log p — communication cost per unit compute *decreases*. This is why matrix multiply scales so well with MPI: the algorithm itself has favorable communication-to-computation ratio. The `gather()` method uses `MPI_Allgatherv` rather than `MPI_Allgather` specifically to handle the variable column counts from the remainder distribution — crucial for correct load balancing."
 
 ---
 
@@ -87,7 +87,7 @@ Matrix  | 1T      | 4T      | 8T      | 16T     | Speedup @ 16T
 
 ## **[SLIDE 13 — Summary: Four Paradigms, Four Design Choices]** *(20 seconds)*
 
-"Sequential: value semantics + transpose trick for cache optimization. OpenMP: conditional parallelism + collapse(2) for load balance. MPI: column partitioning + Allreduce for minimal communication overhead. GPU: 32×32 tiling + local memory for bandwidth optimization. Each design exploits the hardware's strength. Sequential is correct and portable. OpenMP achieves **14-15×** speedup on 16 cores, hitting memory bandwidth ceiling. MPI scales linearly with near-zero communication overhead. GPU helps for batched workloads, not single matrices. Questions."
+"Sequential: value semantics + transpose trick for cache optimization. OpenMP: conditional parallelism + collapse(2) for load balance. MPI: column partitioning + Allreduce for minimal communication overhead. GPU: 32×32 tiling + local memory for bandwidth optimization. Each design exploits the hardware's strength. Sequential is correct and portable. OpenMP achieves **14-15×** speedup on 16 cores on strong scaling, hitting memory bandwidth ceiling — but could do better on weak scaling. MPI scales linearly because the algorithm's O(N³) / O(N²) ratio means communication cost per compute shrinks as problem size grows. GPU helps for batched workloads, not single matrices. The takeaway: parallelism is about understanding your bottleneck — memory for linear algebra, communication for distributed systems, compute for GPU. Choose your paradigm by identifying which resource you're trying to saturate. Questions."
 
 ---
 
